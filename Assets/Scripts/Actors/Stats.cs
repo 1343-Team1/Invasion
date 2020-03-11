@@ -16,7 +16,8 @@ namespace Invasion
         // Private/protected variables.
 
         // Public variables.
-        public float maximumSpeed;
+        public float speed;                                     // The speed this Actor's rigidbody2d will move.
+        public float jumpStrength;                              // The strength of this Actor's jump.
 
         // Exposed private/protected variables.
         //[Header("Debug Data")]

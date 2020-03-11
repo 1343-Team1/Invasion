@@ -16,11 +16,10 @@ namespace Invasion
         // Private/protected variables.
         GameManager GM;                                         // a reference to the GameManager.
         protected ActorController actorController;              // the target that the input data will be sent to.
-        protected float speed = 3;                              // the base speed for editor multipliers.
+        protected float speed = 3;                              // the hidden base speed to calibrate the editor to 1.
 
         // Public variables.
-        [Header("Common Settings")]
-        public float horizontalSensitivity;                     // allows precise control of speed in the editor.
+        //[Header("Common Settings")]
 
         // Exposed private/protected variables.
         [Header("Debug Data")]
@@ -36,6 +35,5 @@ namespace Invasion
             GM = FindObjectOfType<GameManager>();
             actorController = GetComponent<ActorController>();
         }
-
     }
 }
