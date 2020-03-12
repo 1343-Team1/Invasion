@@ -23,6 +23,10 @@ namespace Invasion
         bool controllerHasDeadzone = false;                     // allows the player to specify a deadzone if they want.
 
         // Public variables.
+        [Header("Button Configuration")]
+        public KeyCode runKey = KeyCode.LeftShift;                      // key to run.
+        public bool isRunToggle = true;                                 // run is toggleable.
+
         [Header("Controller Settings")]
         public Vector2 deadzone = new Vector2(0f, 0f);                  // thumbstick deadzone if a controller is being used.
         public Vector2 thumbstickSensitivity = new Vector2(0.5f, 0.5f); // thumbstick sensitivity if a controller is being used.
@@ -32,17 +36,26 @@ namespace Invasion
          * =- Functions -=
          ********************/
 
-        // Send instant input to the ActorController.
+        // Send instant input to the ActorController as fast as possible it will handle coordinating animation with physics.
         void Update()
         {
+            actorController.InformAxis(GetMovement());
+            actorController.InformRun(IsRunning(), isRunToggle);
+
             if (IsJumping())
                 actorController.InformJump(true);
         }
 
-        // Send input to the ActorController in time with the physics system.
-        void FixedUpdate()
+        // Is the player running?
+        bool IsRunning()
         {
-            actorController.InformAxis(GetMovement());
+            if (isRunToggle && Input.GetKeyDown(runKey))    // only trigger on the frame key is down for toggle.
+                return true;
+
+            if (!isRunToggle && Input.GetKey(runKey))       // maintain accurate data stream if not toggle.
+                return true;
+
+            return false;
         }
 
         // Is the player inputting a jump command?

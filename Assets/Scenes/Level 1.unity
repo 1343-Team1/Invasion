@@ -349,6 +349,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   adjustedInput: {x: 0, y: 0}
   input: {x: 0, y: 0}
+  runKey: 304
+  isRunToggle: 1
   deadzone: {x: 0, y: 0}
   thumbstickSensitivity: {x: 0.5, y: 0.5}
 --- !u!114 &935604220
@@ -363,12 +365,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5632c61e6485a3649929b388fa62d8c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maximumVelocity: 5
+  runMultiplier: 2
+  walkSpeed: 0.7
   jumpStrength: 5
+  extraJumps: 0
   moveByForce: 0
-  accelerationRate: {x: 10, y: 0}
+  accelerationRate: {x: 23, y: 0}
   decelerateAt: {x: 5, y: 0}
   decelerationMultiplier: {x: 5, y: 0}
+  canDoubleJump: 0
   jumpByForce: 0
   jumpForceMultiplier: 50
   velocity: {x: 0, y: 0}
@@ -382,7 +387,7 @@ Animator:
   m_GameObject: {fileID: 935604218}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 506e2bc79e73ed04ebd6b914bd1c6ef7, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -425,8 +430,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 2, y: 4}
+  m_Offset: {x: -0.03, y: 0.85}
+  m_Size: {x: 0.5, y: 1.7}
   m_Direction: 0
 --- !u!212 &935604224
 SpriteRenderer:
@@ -467,7 +472,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 41088b0bf2b0e1840bee862e379fb94d, type: 3}
+  m_Sprite: {fileID: -4264155003582075614, guid: f251d25926c24e9439299c31b30a46ac,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -486,7 +492,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 935604218}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -3.91, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -504,8 +510,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87dbb36a051330b4d83d14e367a3d5f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  runMultiplier: 2
+  walkSpeed: 0.7
   jumpStrength: 5
+  extraJumps: 1
 --- !u!1 &2131486202
 GameObject:
   m_ObjectHideFlags: 0
@@ -598,7 +606,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 0.8}
   m_EdgeRadius: 0
 --- !u!4 &2131486205
 Transform:
