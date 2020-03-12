@@ -24,6 +24,8 @@ namespace Invasion
         bool accelerating = false;                              // used to determine whether to slow down.
         bool waitingToJump = false;                             // used to determine whether the actor is jumping.
         bool isRunning = false;                                 // used to determine whether the actor is running.
+        bool isJumpBursting = false;                            // used to determine whether the actor is using a jetpack.
+        bool isFalling = false;                                 // used to determine whether the actor is falling.
         int numberOfJumps = 0;                                  // used to determine whether the actor can jump yet.
 
         // Public variables.
@@ -40,7 +42,9 @@ namespace Invasion
         public Vector2 decelerationMultiplier = new Vector2();  // modify the rate of deceleration.
 
         [Header("General Jump Settings")]
-        public bool canDoubleJump = false;                      // whether the actor can double-jump.
+        public ParticleBurster jetPackParticleBurster;          // a reference to the particle burster (if there is one).
+        public bool jetPackOnlyOnForceJump;                     // is the jetpack only used on the force jump?
+        public float fallingControlMultiplier;                  // how much the player can influence the fall trajectory of the actor.
 
         [Header("Force Based Jump Settings")]
         public bool jumpByForce = false;                        // make the actor jump by applying force instead of setting velocity.
@@ -65,7 +69,7 @@ namespace Invasion
         }
 
         // ========== ANIMATIONS ==========
-        // Handle animations in the Update loop so that they are responsive.
+        // Animate the actor in the Update so that there is immediate response.
         void Update()
         {
             // ---- Movement ----
@@ -74,7 +78,18 @@ namespace Invasion
             AnimateToIdle();
 
             // ---- Jumping ----
+            AnimateJetpack();
             AnimateFalling();
+        }
+
+        // Animate the jetpack.
+        void AnimateJetpack()
+        {
+            if (jetPackParticleBurster && isJumpBursting)
+            {
+                Debug.Log("animating");
+                jetPackParticleBurster.BurstParticles();
+            }
         }
 
         // Update the animator with the current velocity of the actor.
@@ -83,6 +98,8 @@ namespace Invasion
             animator.SetFloat("Horizontal Velocity", Mathf.Abs(rigidbody2d.velocity.x));
             animator.SetFloat("Vertical Velocity", rigidbody2d.velocity.y);
             animator.SetBool("Running", isRunning);
+            if (Mathf.Abs(rigidbody2d.velocity.x) > 0)
+                animator.SetBool("Walking", true);
         }
 
         // Use the horizontal transform scale to turn the actor in the direction of their velocity.
@@ -100,6 +117,7 @@ namespace Invasion
             if (rigidbody2d.velocity.y >= 0)        // grounded or jumping, but not falling.
             {
                 animator.SetBool("Falling", false); // let the animator know the actor isn't falling.
+                isFalling = false;                  // record that the actor is no longer falling.
 
                 if (rigidbody2d.velocity.y == 0)    // grounded!
                     numberOfJumps = 0;              // reset the jumps.
@@ -111,7 +129,9 @@ namespace Invasion
             if (!waitingToJump)
                 animator.SetBool("Jumping", false);     // let the animator know the actor is not jumping.
 
+            isJumpBursting = false;                     // turn off the jetPack particles.
             animator.SetBool("Falling", true);          // let the animator know the actor is falling.
+            isFalling = true;                           // record that the actor is falling.
         }
 
         // Animate back to idle only if not moving.
@@ -122,7 +142,7 @@ namespace Invasion
         }
 
         // ========== PHYSICS ==========
-        // Move and animate the actor according to input and state.
+        // Move the actor according to input and state in the FixedUpdate, so it synchs with physics.
         void FixedUpdate()
         {
             // ---- Movement ----
@@ -149,12 +169,18 @@ namespace Invasion
         {
             rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x, ((stats) ? stats.jumpStrength : jumpStrength));
             waitingToJump = false;
+
+            if (jetPackParticleBurster && !jetPackOnlyOnForceJump)
+                isJumpBursting = true;              // turn on the jetpack particles.
         }
 
         void JumpByForce()
         {
             rigidbody2d.AddForce(new Vector2(0.0f, ((stats) ? stats.jumpStrength : jumpStrength)) * jumpForceMultiplier);
             waitingToJump = false;
+
+            if (jetPackParticleBurster)
+                isJumpBursting = true;              // turn on the jetpack particles.
         }
 
         // Take jump input from an ActorInput component.
@@ -189,10 +215,10 @@ namespace Invasion
             if (isRunning)
                 moveBy *= runMultiplier;
 
-            rigidbody2d.velocity = new Vector2(moveBy, rigidbody2d.velocity.y);
+            if (isFalling)
+                moveBy *= fallingControlMultiplier;
 
-            if (Mathf.Abs(moveBy) > 0)
-                animator.SetBool("Walking", true);
+            rigidbody2d.velocity = new Vector2(moveBy, rigidbody2d.velocity.y);
         }
 
         // Move by adding accelerationRate in force to the rigidbody, limited to maximumVelocity.
@@ -201,11 +227,11 @@ namespace Invasion
             if (isRunning)
                 input *= runMultiplier;
 
+            if (isFalling)
+                input *= fallingControlMultiplier;
+
             rigidbody2d.AddForce(input);
             LimitVelocity();
-
-            if (Mathf.Abs(rigidbody2d.velocity.x) > 0)
-                animator.SetBool("Walking", true);
         }
 
         // Limit maximum velocity of the rigidbody to the Stats.speed if present, or the maximumVelocity.
