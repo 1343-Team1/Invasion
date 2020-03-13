@@ -26,6 +26,8 @@ namespace Invasion
         [Header("Button Configuration")]
         public KeyCode runKey = KeyCode.LeftShift;                      // key to run.
         public bool isRunToggle = true;                                 // run is toggleable.
+        public KeyCode fireKey = KeyCode.Mouse0;                        // key to fire.
+        public bool isFireToggle = false;                                // semi or full auto.
 
         [Header("Controller Settings")]
         public Vector2 deadzone = new Vector2(0f, 0f);                  // thumbstick deadzone if a controller is being used.
@@ -39,11 +41,29 @@ namespace Invasion
         // Send instant input to the ActorController as fast as possible it will handle coordinating animation with physics.
         void Update()
         {
+            // ---- Movement ----
             actorController.InformAxis(GetMovement());
             actorController.InformRun(IsRunning(), isRunToggle);
 
+            // ---- Jumping ----
             if (IsJumping())
                 actorController.InformJump(true);
+
+            // ---- Firing ----
+            if (IsFiring())
+                actorController.FireProjectile();
+        }
+
+        // Is the player firing?
+        bool IsFiring()
+        {
+            if (isFireToggle && Input.GetKeyDown(fireKey))
+                return true;
+
+            if (!isFireToggle && Input.GetKey(fireKey))
+                return true;
+
+            return false;
         }
 
         // Is the player running?
@@ -67,7 +87,7 @@ namespace Invasion
         // Calculate input from either gamepad or keyboard.
         Vector2 GetMovement()
         {
-            input = new Vector2(Input.GetAxisRaw("Horizontal"), 0.0f);
+            input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
             adjustedInput = GetAdjustedInput();
 
@@ -77,7 +97,7 @@ namespace Invasion
         // Calculate the adjusted speed.
         Vector2 GetAdjustedInput()
         {
-            Vector2 adjustedInput = new Vector2(input.x * speed, 0.0f);
+            Vector2 adjustedInput = new Vector2(input.x * speed, input.y);
             if (actorController.moveByForce)
                 adjustedInput *= actorController.accelerationRate;
 
