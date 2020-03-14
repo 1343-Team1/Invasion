@@ -1,14 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿/// Author: Jeremy Anderson, March 12, 2020.
+
 using UnityEngine;
 
 namespace Invasion
 {
-    [RequireComponent(typeof(Collider2D))][RequireComponent(typeof(Animator))]
     /// <summary>
     /// Takes input from a keyboard and mouse or gamepad, allows configuration,
     /// and sends that data to the ActorController.
     /// </summary>
+    [RequireComponent(typeof(Collider2D))][RequireComponent(typeof(Animator))]
     public class Projectile : MonoBehaviour
     {
         /********************

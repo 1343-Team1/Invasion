@@ -66,13 +66,18 @@
     <Compile Include="Assets\Scripts\Actors\ActorInput.cs" />
     <Compile Include="Assets\Scripts\Actors\PlayerInput.cs" />
     <Compile Include="Assets\Scripts\Actors\Stats.cs" />
+    <Compile Include="Assets\Scripts\Camera\CameraController.cs" />
     <Compile Include="Assets\Scripts\Effects\Flickerer.cs" />
     <Compile Include="Assets\Scripts\Effects\ParticleBurster.cs" />
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
     <Compile Include="Assets\Scripts\Objects\Projectile.cs" />
     <Compile Include="Assets\Scripts\PickASprite.cs" />
-    <Compile Include="Assets\Scripts\Utilities\DisplayWithoutEdit.cs" />
-    <Compile Include="Assets\Scripts\Utilities\DisplayWithoutEditDrawer.cs" />
+    <Compile Include="Assets\Scripts\Tools\AnimationTester.cs" />
+    <Compile Include="Assets\Scripts\Tools\ButtonEditor.cs" />
+    <Compile Include="Assets\Scripts\Tools\DisplayWithoutEdit.cs" />
+    <Compile Include="Assets\Scripts\Tools\DisplayWithoutEditDrawer.cs" />
+    <Compile Include="Assets\Scripts\Tools\EditorButtonAttribute.cs" />
+    <Compile Include="Assets\Scripts\Tools\TestScriptButton.cs" />
     <None Include="Assets\Utilities\Shaders\Translucent.shader" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>I:/School - Jeremy/NCTC Classes/03 - Spring 2020/03 1343 0400 Simulation Unity/INVASION/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>

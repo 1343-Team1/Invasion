@@ -1,14 +1,16 @@
-﻿using System.Collections;
+﻿/// Author: Jeremy Anderson, March 10, 2020.
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Invasion
 {
-    [RequireComponent(typeof(Rigidbody2D))] [RequireComponent(typeof(Collider2D))]
     /// <summary>
     /// Translates input received from an ActorInput object into actual movement,
     /// whether from the player or AI, and coordinates the animations.
     /// </summary>
+    [RequireComponent(typeof(Rigidbody2D))][RequireComponent(typeof(Collider2D))]
     public class ActorController : MonoBehaviour
     {
         /********************

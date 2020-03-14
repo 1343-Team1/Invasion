@@ -1,0 +1,301 @@
+fileFormatVersion: 2
+guid: 81e38933a305d214b9c9bf25ace838d3
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6293910983141654900
+    second: Front Beam Tile
+  - first:
+      213: 4101976089171980210
+    second: Front Beam Whole
+  - first:
+      213: 1707982962013441501
+    second: Back Beam Tile
+  - first:
+      213: -1279018432357407024
+    second: Inner Image
+  - first:
+      213: 419475421814174181
+    second: Whole Image
+  - first:
+      213: -6861718141631033980
+    second: Pipe
+  - first:
+      213: 8216359667177670560
+    second: Pipe Left End
+  - first:
+      213: 2203242154435218567
+    second: Pipe Right End
+  - first:
+      213: 8435130093121956426
+    second: Pipe Bump Large
+  - first:
+      213: 2725286531926681550
+    second: Pipe Loop Left
+  - first:
+      213: 2135323787026699231
+    second: Pipe Bump Small
+  - first:
+      213: -7033859139358607270
+    second: Small Pipe Standard Vertical Length
+  - first:
+      213: -7480984147889235896
+    second: Small Pipe Left Corner
+  - first:
+      213: -6951746126941923743
+    second: back-structures_13
+  - first:
+      213: -4361302393437106483
+    second: Small Pipe Right Corner
+  - first:
+      213: -892027328495928161
+    second: Small Pipe Narrow Section
+  - first:
+      213: -8183138730213162216
+    second: back-structures_16
+  - first:
+      213: 5035939133979737056
+    second: Small Pipe Right Wide
+  - first:
+      213: 4148673269689117941
+    second: Pipe Socket
+  - first:
+      213: 2118367705033508874
+    second: Small Pipe Short Vertical Length
+  - first:
+      213: 114610994823167360
+    second: Pipe Socket Small
+  - first:
+      213: 6983396382524401838
+    second: Pipe Socket Large
+  - first:
+      213: 7173118122589760642
+    second: Small Pipe Left Wide
+  - first:
+      213: 5965305921785564505
+    second: Small Pipe Right Wide
+  - first:
+      213: -1633486294636133647
+    second: Small Pipe Vertical Narrow
+  - first:
+      213: 7797314993834328723
+    second: Loop Pipe Right
+  - first:
+      213: 7415921404038936598
+    second: Background Structure_0
+  - first:
+      213: 4320120041614219482
+    second: Background Structure_1
+  - first:
+      213: 6853448288879696465
+    second: Background Structure_2
+  - first:
+      213: 2619432680325590487
+    second: Background Structure_3
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 512
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 512
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 512
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Background Structure_0
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 0
+        width: 323
+        height: 176
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 618f4f9c935aae660800000000000000
+      internalID: 7415921404038936598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background Structure_2
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 0
+        width: 51
+        height: 176
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15ade2958e65c1f50800000000000000
+      internalID: 6853448288879696465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background Structure_1
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 0
+        width: 118
+        height: 176
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -59, y: 48}
+        - {x: -52, y: 88}
+        - {x: 59, y: 88}
+        - {x: 59, y: -88}
+        - {x: -59, y: -88}
+        - {x: -59, y: 30}
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad81673f94624fb30800000000000000
+      internalID: 4320120041614219482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background Structure_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 213
+        height: 176
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 106.5, y: -88}
+        - {x: -106.5, y: -88}
+        - {x: -106.5, y: 88}
+        - {x: 106.5, y: 88}
+        - {x: 106.5, y: 76}
+        - {x: 99.5, y: 39}
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7dd2bd7f4281a5420800000000000000
+      internalID: 2619432680325590487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Blood
   layers:
   - Default
   - TransparentFX
@@ -13,14 +14,14 @@ TagManager:
   - UI
   - 
   - 
-  - Collidable Environment
+  - Non-Collidable Environment Back
+  - Non-Collidable Environment Mid
+  - Non-Collidable Environment Front
+  - Collidable Environment Back
+  - Collidable Environment Mid
+  - Collidable Environment Front
+  - Navigation
   - Actor
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
   - 
   - 
   - 
@@ -40,4 +41,25 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background Outside Far
+    uniqueID: 4161812061
+    locked: 0
+  - name: Background Outside Near
+    uniqueID: 271500771
+    locked: 0
+  - name: Background Far
+    uniqueID: 2530773735
+    locked: 0
+  - name: Background Near
+    uniqueID: 2223905865
+    locked: 0
+  - name: Midground
+    uniqueID: 1330789825
+    locked: 0
+  - name: Foreground
+    uniqueID: 2272152871
+    locked: 0
+  - name: Foreground Closest
+    uniqueID: 3908325529
     locked: 0

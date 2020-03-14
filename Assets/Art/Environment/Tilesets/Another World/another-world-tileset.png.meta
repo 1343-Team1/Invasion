@@ -1,0 +1,1810 @@
+fileFormatVersion: 2
+guid: 7f135b9d09c482e4cbb4b70d697d2dc6
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1928243367707969999
+    second: another-world-tileset_0
+  - first:
+      213: 4740540260104482379
+    second: another-world-tileset_1
+  - first:
+      213: -794127080731738587
+    second: another-world-tileset_2
+  - first:
+      213: 1800435093034364857
+    second: another-world-tileset_3
+  - first:
+      213: -4862178449658170930
+    second: another-world-tileset_4
+  - first:
+      213: 1968712725363530280
+    second: another-world-tileset_5
+  - first:
+      213: -8675883876337984482
+    second: another-world-tileset_6
+  - first:
+      213: -9166928169243551563
+    second: another-world-tileset_7
+  - first:
+      213: 985851832521843540
+    second: another-world-tileset_8
+  - first:
+      213: -3461540934662806712
+    second: another-world-tileset_9
+  - first:
+      213: 1573373283005203813
+    second: another-world-tileset_10
+  - first:
+      213: 405860446948042329
+    second: another-world-tileset_11
+  - first:
+      213: -4053511766618535302
+    second: another-world-tileset_12
+  - first:
+      213: -5111949896220823795
+    second: another-world-tileset_13
+  - first:
+      213: -332225446283994309
+    second: another-world-tileset_14
+  - first:
+      213: -4675066226545270372
+    second: another-world-tileset_15
+  - first:
+      213: 2794216477091119002
+    second: another-world-tileset_16
+  - first:
+      213: 6540588722255557495
+    second: another-world-tileset_17
+  - first:
+      213: -4404083681891037418
+    second: another-world-tileset_18
+  - first:
+      213: -4747440955177089074
+    second: another-world-tileset_19
+  - first:
+      213: 3106243137629530119
+    second: another-world-tileset_20
+  - first:
+      213: 2881907805849906312
+    second: another-world-tileset_21
+  - first:
+      213: -6933967881272620265
+    second: another-world-tileset_22
+  - first:
+      213: -6447854360685376331
+    second: another-world-tileset_23
+  - first:
+      213: -664321639586877420
+    second: another-world-tileset_24
+  - first:
+      213: 5390694972310693986
+    second: another-world-tileset_25
+  - first:
+      213: 6004930376012248269
+    second: another-world-tileset_26
+  - first:
+      213: -6841641722941563575
+    second: another-world-tileset_27
+  - first:
+      213: -5639585585406248727
+    second: another-world-tileset_28
+  - first:
+      213: -8856695274326408413
+    second: another-world-tileset_29
+  - first:
+      213: -5758368290310906464
+    second: another-world-tileset_30
+  - first:
+      213: -73665083731626071
+    second: another-world-tileset_31
+  - first:
+      213: -2601930187333843496
+    second: another-world-tileset_32
+  - first:
+      213: -274090147723988126
+    second: another-world-tileset_33
+  - first:
+      213: 3615544006751025140
+    second: another-world-tileset_34
+  - first:
+      213: -5827157607176318710
+    second: another-world-tileset_35
+  - first:
+      213: -8993999622289411000
+    second: another-world-tileset_36
+  - first:
+      213: -8733882333512129736
+    second: another-world-tileset_37
+  - first:
+      213: 8628886843101443265
+    second: another-world-tileset_38
+  - first:
+      213: 5204667219176538493
+    second: another-world-tileset_39
+  - first:
+      213: 7359119732647712586
+    second: another-world-tileset_40
+  - first:
+      213: -1193423264364048437
+    second: another-world-tileset_41
+  - first:
+      213: -1682959009254510705
+    second: another-world-tileset_42
+  - first:
+      213: 9055994583819920790
+    second: another-world-tileset_43
+  - first:
+      213: 8980716887215285265
+    second: another-world-tileset_44
+  - first:
+      213: -5087520789436481885
+    second: another-world-tileset_45
+  - first:
+      213: -3535040361954104361
+    second: another-world-tileset_46
+  - first:
+      213: 53677335472574001
+    second: another-world-tileset_47
+  - first:
+      213: -9080794860290584373
+    second: another-world-tileset_48
+  - first:
+      213: -5081108657776070452
+    second: another-world-tileset_49
+  - first:
+      213: -8274403318295368386
+    second: another-world-tileset_50
+  - first:
+      213: 2139990898536468568
+    second: another-world-tileset_51
+  - first:
+      213: 1916814693779453078
+    second: another-world-tileset_52
+  - first:
+      213: -4357544113658073192
+    second: another-world-tileset_53
+  - first:
+      213: 1341749363630919751
+    second: another-world-tileset_54
+  - first:
+      213: -8960483076855753339
+    second: another-world-tileset_55
+  - first:
+      213: 7631739124668936613
+    second: another-world-tileset_56
+  - first:
+      213: 7754435013738737494
+    second: another-world-tileset_57
+  - first:
+      213: -432577476490074712
+    second: another-world-tileset_58
+  - first:
+      213: -4386109900752078134
+    second: another-world-tileset_59
+  - first:
+      213: 8053281216041181147
+    second: another-world-tileset_60
+  - first:
+      213: 7228040881524677186
+    second: another-world-tileset_61
+  - first:
+      213: -8876079425147266486
+    second: another-world-tileset_62
+  - first:
+      213: 7339159471481266147
+    second: another-world-tileset_63
+  - first:
+      213: -790100572647552215
+    second: another-world-tileset_64
+  - first:
+      213: -4817189735254499020
+    second: another-world-tileset_65
+  - first:
+      213: -26797308270615315
+    second: another-world-tileset_66
+  - first:
+      213: -7086469504957546275
+    second: another-world-tileset_67
+  - first:
+      213: 8438589233121327074
+    second: another-world-tileset_68
+  - first:
+      213: -2583221781445406804
+    second: another-world-tileset_69
+  - first:
+      213: 8142033161070187933
+    second: another-world-tileset_70
+  - first:
+      213: -4761314906450665125
+    second: another-world-tileset_71
+  - first:
+      213: -4893943248065461104
+    second: another-world-tileset_72
+  - first:
+      213: 2306643556069768108
+    second: another-world-tileset_73
+  - first:
+      213: -4691984516685027890
+    second: another-world-tileset_74
+  - first:
+      213: -73313893803273422
+    second: another-world-tileset_75
+  - first:
+      213: 3126268798868810617
+    second: another-world-tileset_76
+  - first:
+      213: 4494969669243433111
+    second: another-world-tileset_77
+  - first:
+      213: 6057404638008042413
+    second: another-world-tileset_78
+  - first:
+      213: 6906052248761574742
+    second: another-world-tileset_79
+  - first:
+      213: 9216843811819340259
+    second: another-world-tileset_80
+  - first:
+      213: 757032106138203748
+    second: another-world-tileset_81
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 512
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 512
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 512
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: another-world-tileset_2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 96
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52e7776a0a1baf4f0800000000000000
+      internalID: -794127080731738587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 96
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9bfe5719d2e6cf810800000000000000
+      internalID: 1800435093034364857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_4
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 96
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec1b0910672168cb0800000000000000
+      internalID: -4862178449658170930
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_5
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 96
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82a95140bc5425b10800000000000000
+      internalID: 1968712725363530280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_6
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 96
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1cd55ec491199780800000000000000
+      internalID: -8675883876337984482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_8
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 453e1a6b4037ead00800000000000000
+      internalID: 985851832521843540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_9
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84323f52cd226ffc0800000000000000
+      internalID: -3461540934662806712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_10
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5658d903aaeb5d510800000000000000
+      internalID: 1573373283005203813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_11
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95628b81de7e1a500800000000000000
+      internalID: 405860446948042329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_12
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7a06d156880fb7c0800000000000000
+      internalID: -4053511766618535302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_13
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0fa92657a4be09b0800000000000000
+      internalID: -5111949896220823795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_14
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 81
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3b95e087b2b36bf0800000000000000
+      internalID: -332225446283994309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_15
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c91e7595904de1fb0800000000000000
+      internalID: -4675066226545270372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_16
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9f3f8ed41d07c620800000000000000
+      internalID: 2794216477091119002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_17
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 773f7f31ac6d4ca50800000000000000
+      internalID: 6540588722255557495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_18
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61f4ac3a93d81e2c0800000000000000
+      internalID: -4404083681891037418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_19
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec74782ba93bd1eb0800000000000000
+      internalID: -4747440955177089074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_20
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70827641da79b1b20800000000000000
+      internalID: 3106243137629530119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_21
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 88ceb1361e79ef720800000000000000
+      internalID: 2881907805849906312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_22
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71b07c023f895cf90800000000000000
+      internalID: -6933967881272620265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_23
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5bc05e30f9e9486a0800000000000000
+      internalID: -6447854360685376331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_24
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 410b1df0dfad7c6f0800000000000000
+      internalID: -664321639586877420
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_25
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 268201524889fca40800000000000000
+      internalID: 5390694972310693986
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_27
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94d939ff91b9d01a0800000000000000
+      internalID: -6841641722941563575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_28
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e872753aca2cb1b0800000000000000
+      internalID: -5639585585406248727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_29
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 65
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 323c4e1a292b61580800000000000000
+      internalID: -8856695274326408413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_30
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ad15229c8a2610b0800000000000000
+      internalID: -5758368290310906464
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_31
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a7b3d32ff94afef0800000000000000
+      internalID: -73665083731626071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_32
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d5c99db74614ebd0800000000000000
+      internalID: -2601930187333843496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_33
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2633a7c767c323cf0800000000000000
+      internalID: -274090147723988126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_35
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a015a06a707c12fa0800000000000000
+      internalID: -5827157607176318710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_37
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83323f0ba440bc680800000000000000
+      internalID: -8733882333512129736
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_38
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c47a12bdd6ffb770800000000000000
+      internalID: 8628886843101443265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_40
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a47d8041868d02660800000000000000
+      internalID: 7359119732647712586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_41
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bcfc4e43ddb107fe0800000000000000
+      internalID: -1193423264364048437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_42
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8f67d1a2bde4a8e0800000000000000
+      internalID: -1682959009254510705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_43
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 695a270e71b5dad70800000000000000
+      internalID: 9055994583819920790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_44
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 114a1d25d6ae1ac70800000000000000
+      internalID: 8980716887215285265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_45
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ae393efbce7569b0800000000000000
+      internalID: -5087520789436481885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_46
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 49
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7dbae0f258301fec0800000000000000
+      internalID: -3535040361954104361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_47
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13e05519043beb000800000000000000
+      internalID: 53677335472574001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_48
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc0df2acf298af180800000000000000
+      internalID: -9080794860290584373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_49
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc0781cb8964c79b0800000000000000
+      internalID: -5081108657776070452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_50
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3de0bc850a6b2d80800000000000000
+      internalID: -8274403318295368386
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_52
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69439faeec4e99a10800000000000000
+      internalID: 1916814693779453078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_53
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89fe05447b4e683c0800000000000000
+      internalID: -4357544113658073192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_54
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 740d3d4ffe9de9210800000000000000
+      internalID: 1341749363630919751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_55
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5851d14cd18f5a380800000000000000
+      internalID: -8960483076855753339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_56
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 33
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a1b7589c4269e960800000000000000
+      internalID: 7631739124668936613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_57
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65fafbb6f894d9b60800000000000000
+      internalID: 7754435013738737494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_58
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a569f7b31d2ff9f0800000000000000
+      internalID: -432577476490074712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_59
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aca39dba8486123c0800000000000000
+      internalID: -4386109900752078134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_60
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bdfd57e099003cf60800000000000000
+      internalID: 8053281216041181147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_64
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92b828e17bff805f0800000000000000
+      internalID: -790100572647552215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_65
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4316f765577e52db0800000000000000
+      internalID: -4817189735254499020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_67
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd00e5de78dc7ad90800000000000000
+      internalID: -7086469504957546275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_68
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e7f1ada234eb1570800000000000000
+      internalID: 8438589233121327074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_69
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: caf05ece97d862cd0800000000000000
+      internalID: -2583221781445406804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_70
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d951a0b85005ef070800000000000000
+      internalID: 8142033161070187933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_71
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b516c31b1596cedb0800000000000000
+      internalID: -4761314906450665125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_72
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 094032c8b88351cb0800000000000000
+      internalID: -4893943248065461104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_73
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cab7bf6d718d20020800000000000000
+      internalID: 2306643556069768108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_74
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec52b57f0f8b2eeb0800000000000000
+      internalID: -4691984516685027890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_75
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 23351cae6698bfef0800000000000000
+      internalID: -73313893803273422
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_76
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97b66fca8ecb26b20800000000000000
+      internalID: 3126268798868810617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_77
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 790f86b4917516e30800000000000000
+      internalID: 4494969669243433111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_78
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da3e54dbc69301450800000000000000
+      internalID: 6057404638008042413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_80
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e1cfb92d9ec8ef70800000000000000
+      internalID: 9216843811819340259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: another-world-tileset_81
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 466fee980b4818a00800000000000000
+      internalID: 757032106138203748
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

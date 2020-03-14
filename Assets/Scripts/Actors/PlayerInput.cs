@@ -1,14 +1,16 @@
-﻿using System.Collections;
+﻿/// Author: Jeremy Anderson, March 10, 2020.
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Invasion
 {
-    [RequireComponent(typeof(ActorController))]
     /// <summary>
     /// Takes input from a keyboard and mouse or gamepad, allows configuration,
     /// and sends that data to the ActorController.
     /// </summary>
+    [RequireComponent(typeof(ActorController))]
     public class PlayerInput : ActorInput
     {
         /********************
