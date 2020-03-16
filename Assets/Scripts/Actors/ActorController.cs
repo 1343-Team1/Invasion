@@ -17,7 +17,7 @@ namespace Invasion
          * =- Variables -=
          ********************/
 
-        // Private/protected variables.
+        // ========== PRIVATE / PROTECTED ==========
         GameManager GM;                                         // a reference to the GameManager.
         Rigidbody2D rigidbody2d;                                // a reference to the rigidbody component.
         Animator animator;                                      // a reference to the animator.
@@ -34,12 +34,15 @@ namespace Invasion
         float timeCanFireAgain;                                 // used to allow firing with a delay between projectiles.
         bool facingRight = true;                                // used to coordinate projectile origin when still.                           
 
-        // Public variables.
+        // ========== PUBLIC ==========
         [Header("! IF NO STATS COMPONENT !")]
         public float runMultiplier;                             // the running speed of the actor.
         public float walkSpeed;                                 // the walking speed of the actor.
         public float jumpStrength;                              // the strength of the character's jumps.
         public int extraJumps;                                  // the maximum jumps this actor can make before falling.
+
+        [Header("General Movement Settings")]
+        public bool hasWalkAnimation = false;                   // whether this actor walks or just runs.
 
         [Header("Force Based Movement Settings")]
         public bool moveByForce = false;                        // make the actor move by applying force instead of setting velocity.
@@ -69,7 +72,7 @@ namespace Invasion
         public float fireAngleCenterXAngle;                     // the x angle of the center firing position.
         public Vector2 fireAngleDownCoords;                     // the relative coordinates of the origin when firing "down" at an angle.
         public float fireAngleDownXAngle;                       // the x angle of the downward firing position.
-        public float fireDelay;                                 // how long to wait between bullets.
+        public float fireDelay;                                 // how long to wait between bullets, and to stop the firing animation.
         // public Vector2 fireAngleCrouchedUpCoords;
         //public float fireAngleCrouchUpXAngle;        
         // public Vector2 fireAngleCrouchedCenterCoords;
@@ -95,6 +98,8 @@ namespace Invasion
             stats = GetComponent<Stats>();
             editorGravity = rigidbody2d.gravityScale;
             timeCanFireAgain = Time.time;
+
+            animator.SetBool("Has Walk Animation", hasWalkAnimation);
         }
 
         // ========== ANIMATIONS ==========
@@ -119,6 +124,16 @@ namespace Invasion
 
             // ---- Firing ---- (It is important that these settings match the animator)
             PositionProjectileOrigin();                         // this is not related to physics.
+            StopShooting();                                     // stop shooting if the gun wasn't fired recently.
+        }
+
+        // Stop shooting.
+        void StopShooting()
+        {
+            if (Time.time < timeCanFireAgain)                   // the animation should still be playing.
+                return;                                         // early out.
+
+            animator.SetBool("Shooting", false);
         }
 
         // Fire a projectile.
@@ -134,6 +149,7 @@ namespace Invasion
                 return;                                         // early out.
 
             timeCanFireAgain = Time.time + fireDelay;           // calculate the next time to fire.
+            animator.SetBool("Shooting", true);                 // make sure the shooting animation plays.
 
             // Instantiate the projectile.
             float originX = projectileOrigin.transform.localPosition.x;
@@ -313,6 +329,12 @@ namespace Invasion
         // Take run input from an ActorInput component.
         public void InformRun(bool isRunning, bool isToggle)
         {
+            if (!hasWalkAnimation)                  // walk animation off, always true.
+            {
+                this.isRunning = true;
+                return;
+            }
+
             if (!isToggle)                          // if it's not a toggle, just track the data.
             {
                 this.isRunning = isRunning;
@@ -328,7 +350,7 @@ namespace Invasion
         {
             float moveBy = input.x * ((stats) ? stats.walkSpeed : walkSpeed);
 
-            if (isRunning)
+            if (!hasWalkAnimation || isRunning)     // always running or run key active.
                 moveBy *= runMultiplier;
 
             if (isFalling)
@@ -340,7 +362,7 @@ namespace Invasion
         // Move by adding accelerationRate in force to the rigidbody, limited to maximumVelocity.
         void MoveByForce()
         {
-            if (isRunning)
+            if (!hasWalkAnimation || isRunning)     // always running or run key active.
                 input *= runMultiplier;
 
             if (isFalling)
@@ -355,7 +377,7 @@ namespace Invasion
         {
             float maxVelocity = ((stats) ? stats.walkSpeed : walkSpeed);
 
-            if (isRunning)
+            if (!hasWalkAnimation || isRunning)     // always running or run key active.
                 maxVelocity *= runMultiplier;
 
             if (Mathf.Abs(rigidbody2d.velocity.x) > maxVelocity)

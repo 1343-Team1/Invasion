@@ -16,6 +16,10 @@ namespace Invasion
          ********************/
 
         // Public variables.
+        [Header("Atmosphere")]
+        // 0 to 1, controls the atmosphere of the game through screenshake, sound, and alien and debris spawn rate.
+        public float intensity;
+
         [Header("Actors")]
         public List<ActorController> activeActors;
     }

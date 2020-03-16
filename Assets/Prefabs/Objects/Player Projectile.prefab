@@ -132,6 +132,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.3
-  duration: 0.5
+  duration: 1
   damage: 0
   destroyDelay: 0.2

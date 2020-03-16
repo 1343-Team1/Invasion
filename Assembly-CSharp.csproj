@@ -69,6 +69,8 @@
     <Compile Include="Assets\Scripts\Camera\CameraController.cs" />
     <Compile Include="Assets\Scripts\Effects\Flickerer.cs" />
     <Compile Include="Assets\Scripts\Effects\ParticleBurster.cs" />
+    <Compile Include="Assets\Scripts\Events\DebrisMaker.cs" />
+    <Compile Include="Assets\Scripts\Managers\DebrisManager.cs" />
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
     <Compile Include="Assets\Scripts\Objects\Projectile.cs" />
     <Compile Include="Assets\Scripts\PickASprite.cs" />
