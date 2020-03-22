@@ -9,30 +9,32 @@ namespace Invasion
     /// <summary>
     /// A parent class, providing the foundation for PlayerInput and AI_Input.
     /// </summary>
+    [RequireComponent(typeof(ActorController))]
     public abstract class ActorInput : MonoBehaviour
     {
         /********************
          * =- Variables -=
          ********************/
 
-        // Private/protected variables.
+        // ========== PRIVATE / PROTECTED ==========
         GameManager GM;                                         // a reference to the GameManager.
-        protected ActorController actorController;              // the target that the input data will be sent to.
+        [SerializeField] protected ActorController actorController;              // the target that the input data will be sent to.
         protected float speed = 3;                              // the hidden base speed to calibrate the editor to 1.
 
-        // Public variables.
+        // ========== PUBLIC ==========
         //[Header("Common Settings")]
 
         // Exposed private/protected variables.
         [Header("Debug Data")]
-        [SerializeField][DisplayWithoutEdit()] protected Vector2 adjustedInput = new Vector2(0.0f, 0.0f); // the adjusted input coming in from the controller.
+        [SerializeField] [DisplayWithoutEdit()] protected Vector2 adjustedInput = new Vector2(0.0f, 0.0f); // the adjusted input coming in from the controller.
+        [SerializeField] [DisplayWithoutEdit()] protected Vector2 input = new Vector2(0.0f, 0.0f); // the input coming from the controller or aibrain.
 
         /********************
          * =- Functions -=
          ********************/
 
         // All Input types need to know about the GameManager and their ActorController.
-        void Start()
+        protected virtual void Start()
         {
             GM = FindObjectOfType<GameManager>();
             actorController = GetComponent<ActorController>();

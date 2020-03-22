@@ -17,14 +17,11 @@ namespace Invasion
          * =- Variables -=
          ********************/
 
-        // Exposed debug data being added to the parent class debug data.
-        [SerializeField][DisplayWithoutEdit()] Vector2 input = new Vector2(0.0f, 0.0f); // the raw input coming in from the controller.
-
-        // Private/protected variables.
+        // ========== PRIVATE / PROTECTED ==========
         bool isUsingController = false;                         // toggled if the game detects a controller.
         bool controllerHasDeadzone = false;                     // allows the player to specify a deadzone if they want.
 
-        // Public variables.
+        // ========== PUBLIC ==========
         [Header("Button Configuration")]
         public KeyCode runKey = KeyCode.LeftShift;                      // key to run.
         public bool isRunToggle = true;                                 // run is toggleable.

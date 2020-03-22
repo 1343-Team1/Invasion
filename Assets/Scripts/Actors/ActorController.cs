@@ -41,8 +41,13 @@ namespace Invasion
         public float jumpStrength;                              // the strength of the character's jumps.
         public int extraJumps;                                  // the maximum jumps this actor can make before falling.
 
+        [Header("Raycasting Settings")]
+        public GameObject targetingPoint;                       // a reference to the point from which targeting raycasting will be done.
+
         [Header("General Movement Settings")]
         public bool hasWalkAnimation = false;                   // whether this actor walks or just runs.
+        public bool isWallCrawler = false;                      // whether this actor is restricted to grounded horizontal movement.
+        public bool rotateTowardMovement = false;               // whether this actor will rotate to point in whichever direction it is moving.
 
         [Header("Force Based Movement Settings")]
         public bool moveByForce = false;                        // make the actor move by applying force instead of setting velocity.
@@ -114,7 +119,10 @@ namespace Invasion
             UpdateGravity();
 
             // ---- Movement ----
-            FaceActorTowardMovement();
+            if (rotateTowardMovement)
+                RotateTowardMovement();                         // rotate in direction of movement.
+            else
+                FaceActorTowardMovement();                      // flip in direction of movement.
             InformAnimator();
             AnimateToIdle();
 
@@ -125,6 +133,25 @@ namespace Invasion
             // ---- Firing ---- (It is important that these settings match the animator)
             PositionProjectileOrigin();                         // this is not related to physics.
             StopShooting();                                     // stop shooting if the gun wasn't fired recently.
+        }
+
+        // Rotate to face movement.
+        void RotateTowardMovement()
+        {
+            // If there is no input, don't worry about it.
+            if (input == Vector2.zero)
+                return;
+
+            Quaternion rotation = Quaternion.LookRotation(input);
+            rotation.x = transform.rotation.x;
+            rotation.y = transform.rotation.y;
+
+            transform.rotation = rotation;
+
+            if (input.x < 0)
+                transform.localScale = new Vector3(-1, 1, 1);
+            else
+                transform.localScale = new Vector3(1, 1, 1);
         }
 
         // Stop shooting.
@@ -157,7 +184,7 @@ namespace Invasion
             originX = ((facingRight) ? originX : -originX);
 
             Vector3 originPosition = transform.position + new Vector3(originX, originY, 0);
-            
+
             GameObject obj = Instantiate(projectilePrefab, originPosition, Quaternion.identity);
             Projectile projectile = obj.GetComponent<Projectile>();
 
@@ -189,6 +216,9 @@ namespace Invasion
         // Position projectile origin according to vertical input data.
         void PositionProjectileOrigin()
         {
+            if (!projectileOrigin)                              // non-ranged actors have no projectile origin.
+                return;
+
             projectileOrigin.transform.localPosition = GetFiringAngleCoords();
         }
 
@@ -220,7 +250,7 @@ namespace Invasion
                 animator.SetBool("Walking", true);
         }
 
-        // Use the horizontal transform scale to turn the actor in the direction of their velocity.
+        // Use the horizontal transform scale to flip the actor in the direction of their velocity.
         void FaceActorTowardMovement()
         {
             if (rigidbody2d.velocity.x < 0 && transform.localScale.x != -1)
@@ -327,7 +357,7 @@ namespace Invasion
         }
 
         // Take run input from an ActorInput component.
-        public void InformRun(bool isRunning, bool isToggle)
+        public void InformRun(bool isRunning, bool isToggle = false)
         {
             if (!hasWalkAnimation)                  // walk animation off, always true.
             {
@@ -348,15 +378,15 @@ namespace Invasion
         // Move by setting the velocity of the rigidbody2d directly from stats.speed if present, or maximumVelocity.
         void MoveByVelocity()
         {
-            float moveBy = input.x * ((stats) ? stats.walkSpeed : walkSpeed);
+            Vector2 moveBy = input * ((stats) ? stats.walkSpeed : walkSpeed);
 
             if (!hasWalkAnimation || isRunning)     // always running or run key active.
-                moveBy *= runMultiplier;
+                moveBy.x *= runMultiplier;
 
-            if (isFalling)
-                moveBy *= fallingControlMultiplier;
+            if (!isWallCrawler && isFalling)
+                moveBy.x *= fallingControlMultiplier;
 
-            rigidbody2d.velocity = new Vector2(moveBy, rigidbody2d.velocity.y);
+            rigidbody2d.velocity = new Vector2(moveBy.x, ((isWallCrawler) ? moveBy.y : rigidbody2d.velocity.y));
         }
 
         // Move by adding accelerationRate in force to the rigidbody, limited to maximumVelocity.
@@ -365,7 +395,7 @@ namespace Invasion
             if (!hasWalkAnimation || isRunning)     // always running or run key active.
                 input *= runMultiplier;
 
-            if (isFalling)
+            if (!isWallCrawler && isFalling)
                 input *= fallingControlMultiplier;
 
             rigidbody2d.AddForce(input);
@@ -381,7 +411,7 @@ namespace Invasion
                 maxVelocity *= runMultiplier;
 
             if (Mathf.Abs(rigidbody2d.velocity.x) > maxVelocity)
-                rigidbody2d.velocity = new Vector2 (
+                rigidbody2d.velocity = new Vector2(
                     ((rigidbody2d.velocity.x > 0) ? maxVelocity : -maxVelocity),
                     rigidbody2d.velocity.y);
 
@@ -396,7 +426,8 @@ namespace Invasion
         }
 
         // Decelerate at an increased rate.
-        void Decelerate() {
+        void Decelerate()
+        {
             rigidbody2d.AddForce(-rigidbody2d.velocity * decelerationMultiplier);
         }
 
