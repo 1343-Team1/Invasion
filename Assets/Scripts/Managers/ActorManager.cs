@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿/// Author: Jeremy Anderson, March 19, 2020.
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

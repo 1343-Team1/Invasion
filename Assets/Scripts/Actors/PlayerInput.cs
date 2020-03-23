@@ -26,7 +26,8 @@ namespace Invasion
         public KeyCode runKey = KeyCode.LeftShift;                      // key to run.
         public bool isRunToggle = true;                                 // run is toggleable.
         public KeyCode fireKey = KeyCode.Mouse0;                        // key to fire.
-        public bool isFireToggle = false;                                // semi or full auto.
+        public bool isFireToggle = false;                               // semi or full auto.
+        public KeyCode actionKey = KeyCode.F;                           // key to perform a context sensitive 'action'.
 
         [Header("Controller Settings")]
         public Vector2 deadzone = new Vector2(0f, 0f);                  // thumbstick deadzone if a controller is being used.
@@ -51,6 +52,15 @@ namespace Invasion
             // ---- Firing ----
             if (IsFiring())
                 actorController.FireProjectile();
+        }
+
+        // Is the player pressing the action key?
+        public bool IsPressingActionKey()
+        {
+            if (Input.GetKeyDown(actionKey))
+                return true;
+
+            return false;
         }
 
         // Is the player firing?

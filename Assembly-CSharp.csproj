@@ -69,10 +69,14 @@
     <Compile Include="Assets\Scripts\Actors\PlayerInput.cs" />
     <Compile Include="Assets\Scripts\Actors\Stats.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraController.cs" />
+    <Compile Include="Assets\Scripts\Effects\DebrisMaker.cs" />
     <Compile Include="Assets\Scripts\Effects\Flickerer.cs" />
     <Compile Include="Assets\Scripts\Effects\ParticleBurster.cs" />
-    <Compile Include="Assets\Scripts\Events\DebrisMaker.cs" />
-    <Compile Include="Assets\Scripts\Events\IntensityTrigger.cs" />
+    <Compile Include="Assets\Scripts\Interactables\ControlPanel.cs" />
+    <Compile Include="Assets\Scripts\Interactables\Door.cs" />
+    <Compile Include="Assets\Scripts\Interactables\IntensityTrigger.cs" />
+    <Compile Include="Assets\Scripts\Interactables\SignalReceiver.cs" />
+    <Compile Include="Assets\Scripts\Interactables\SignalSender.cs" />
     <Compile Include="Assets\Scripts\Managers\ActorManager.cs" />
     <Compile Include="Assets\Scripts\Managers\DebrisManager.cs" />
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />

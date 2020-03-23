@@ -1,4 +1,4 @@
-﻿/// Author: Jeremy Anderson, March 10, 2020.
+﻿/// Author: Jeremy Anderson, March 19, 2020.
 
 using System.Collections;
 using System.Collections.Generic;
@@ -18,7 +18,7 @@ namespace Invasion
         // ========== PRIVATE / PROTECTED ==========
         GameManager gameManager;
         List<NavPoint> nextVisiblePoints;
-        GameObject player;
+        [SerializeField] GameObject player;
 
         // ========== PUBLIC ==========
 
@@ -55,9 +55,15 @@ namespace Invasion
         // Is this a valid path toward the player?
         public bool IsGoodPath()
         {
+            if (!player)                            // early out if the player variable hasn't been set yet.
+                return false;
+
             // This NavPoint can see the player.
             if (ActorManager.IsTargetVisible(transform.position, player.transform.position))
                 return true;
+
+            if (nextVisiblePoints.Count <= 0)       // there are no higher visible NavPoints.
+                return false;
 
             // Follow the NavPoints up and see if one leads to the player.
             foreach (NavPoint navPoint in nextVisiblePoints)
