@@ -3,6 +3,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Invasion
 {
@@ -27,7 +28,9 @@ namespace Invasion
         [SerializeField] GameObject currentTargetPoint;
 
         [Header("AI Brain Settings")]
+        [SerializeField] bool isSwarmlingAlive;
         public bool followsNavPoints = false;
+        public bool isSwarmling = false;
 
         /********************
          * =- Functions -=
@@ -38,6 +41,13 @@ namespace Invasion
         {
             actorManager = FindObjectOfType<ActorManager>();
             stats = GetComponent<Stats>();
+            Initialize();
+        }
+
+        public void Initialize()
+        {
+            isSwarmlingAlive = true;
+            actorManager.actualSwarmlingCount++;
 
             // Get a navpoint if one is visible.
             navPoint = GameManager.GetValidNavPoint(transform.position, navPointProximityLimit);
@@ -50,21 +60,27 @@ namespace Invasion
         }
 
         // If the target should be fired at and this AIBrain can fire, then return true.
-        public bool IsFiring()
-        {
-            return false;
-        }
+        public bool IsFiring() { return false; }
 
         // If this AIBrain can run, and is running, then return true.
-        public bool IsRunning()
-        {
-            return false;
-        }
+        public bool IsRunning() { return false; }
 
         // If this AIBrain can jump, and is jumping, then return true.
-        public bool IsJumping()
+        public bool IsJumping() { return false; }
+
+        // Field for the swarmling pool.
+        public bool IsAlive { get { return isSwarmlingAlive; } set { isSwarmlingAlive = value; } }
+
+        // This signal is sent by the ActorController after it animates the death or by the ActorManager while off-screen.
+        public void Die()
         {
-            return false;
+            // Only swarmlings go into a pool.
+            if (!isSwarmling)
+                Destroy(gameObject);
+
+            isSwarmlingAlive = false;                            // Inform the pool.
+            actorManager.actualSwarmlingCount--;
+            gameObject.SetActive(false);                // Turn it off.
         }
 
         // Determines how this AIBrain should move.
@@ -90,6 +106,53 @@ namespace Invasion
                 return navPoint.transform.position - transform.position;
 
             return Vector2.zero;
+        }
+
+        // Draw a yellow circle to show nav points in the editor.
+        void OnDrawGizmos()
+        {
+            Gizmos.color = Color.yellow;
+
+            if (currentTargetPoint)
+            {
+                // Nothing is obscuring the player.
+                if (!(Physics2D.Linecast(transform.position, currentTargetPoint.transform.position, ~(1 << 15))))
+                    Gizmos.DrawLine(transform.position, currentTargetPoint.transform.position);
+            }
+
+            // Draw a line to each visible NavPoint
+            List<GameObject> sceneObjects = new List<GameObject>();
+            SceneManager.GetActiveScene().GetRootGameObjects(sceneObjects);
+
+            // Find The Swarm root gameObject.
+            foreach (GameObject sceneObject in sceneObjects)
+            {
+                // Not the Swarm root gameObject.
+                if (sceneObject.name != "The Swarm")
+                    continue;
+
+                // Get the transform of the second child (the NavPoints) and the number of children it has.
+                Transform editorNavPoints = sceneObject.transform.GetChild(1);
+                int count = editorNavPoints.childCount;
+
+                // Iterate through the children.
+                for (int i = 0; i < count; i++)
+                {
+                    // Not a NavPoint (just in case).
+                    if (!editorNavPoints.GetChild(i).GetComponent<NavPoint>())
+                        continue;
+
+                    // Too low.
+                    if (editorNavPoints.GetChild(i).transform.position.y <= transform.position.y)
+                        continue;
+
+                    // Something is in the way.
+                    if (Physics2D.Linecast(transform.position, editorNavPoints.GetChild(i).transform.position, ~(1 << 15)))
+                        continue;
+
+                    Gizmos.DrawLine(transform.position, editorNavPoints.GetChild(i).transform.position);
+                }
+            }
         }
     }
 }

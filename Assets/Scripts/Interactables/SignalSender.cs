@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Invasion
 {
     /// <summary>
-    /// This class sends a signal to all SignalReceivers in its list.
+    /// This parent class sends a signal to all SignalReceivers in its list.
     /// </summary>
     public class SignalSender : MonoBehaviour
     {
@@ -15,9 +15,10 @@ namespace Invasion
          * =- Functions -=
          ********************/
 
-        public virtual void SendSignal(SignalReceiver destination)
+        // Send a signal to a SignalReceiver.
+        protected virtual void SendSignal(SignalReceiver destination)
         {
-            destination.TryReceiveSignal(this);
+            destination.TryReceiveSignal(this); // currently does nothing with the returned bool.
         }
     }
 }

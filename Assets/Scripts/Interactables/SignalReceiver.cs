@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Invasion
 {
     /// <summary>
-    /// This class can receive a signal.
+    /// This parent class can receive a signal.
     /// </summary>
     public class SignalReceiver : MonoBehaviour
     {
@@ -16,11 +16,11 @@ namespace Invasion
         ********************/
 
         // ========== PRIVATE ==========
-        protected bool receivedSignal = false;
+        protected bool receivedSignal = false;          // used to track whether the SignalReceiver is busy.
 
         // ========== PUBLIC ==========
         [Header("Trigger Settings")]
-        public bool canBeTriggeredMultipleTimes = false;
+        public bool canBeTriggeredMultipleTimes = false; // whether to destroy itself after one trigger.
 
 
         /********************
@@ -39,7 +39,7 @@ namespace Invasion
             if (!canBeTriggeredMultipleTimes)           // this object can only be triggered once.
                 Destroy(this);                          // destroy this SignalReceiver.
 
-            receivedSignal = false;
+            receivedSignal = false;                     // this object can be triggered multiple times, register that it's ready for another signal.
         }
     }
 }

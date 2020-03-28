@@ -1,0 +1,352 @@
+fileFormatVersion: 2
+guid: 8fd1ef9af37f1c846a277812e55f4ddb
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3837339447550855678
+    second: BustedMonitor1_0
+  - first:
+      213: 397048635263552319
+    second: BustedMonitor1_1
+  - first:
+      213: 8227836914477409890
+    second: BustedMonitor1_2
+  - first:
+      213: -1227463269161623300
+    second: BustedMonitor1_3
+  - first:
+      213: -7156996908919213165
+    second: BustedMonitor1_4
+  - first:
+      213: 4430941957526312410
+    second: BustedMonitor1_5
+  - first:
+      213: -5438920265702333217
+    second: BustedMonitor1_6
+  - first:
+      213: 2530703350581850242
+    second: BustedMonitor1_7
+  - first:
+      213: -2258303274423104630
+    second: BustedMonitor1_8
+  - first:
+      213: 545451760487140769
+    second: BustedMonitor1_9
+  - first:
+      213: -2366591837448577992
+    second: BustedMonitor1_10
+  - first:
+      213: 5760907767617839556
+    second: BustedMonitor1_11
+  - first:
+      213: 6327390711267456901
+    second: BustedMonitor1_12
+  - first:
+      213: 7556508711431331984
+    second: BustedMonitor1_13
+  - first:
+      213: 1143321098041418002
+    second: BustedMonitor1_14
+  - first:
+      213: 8034653417086372872
+    second: BustedMonitor1_15
+  - first:
+      213: 630663571364544316
+    second: BustedMonitor1_16
+  - first:
+      213: -8869847570619727722
+    second: BustedMonitor1_17
+  - first:
+      213: -3698572782814106512
+    second: BustedMonitor1_18
+  - first:
+      213: -8593212052357609425
+    second: BustedMonitor1_19
+  - first:
+      213: -8138967850229701847
+    second: BustedMonitor1_20
+  - first:
+      213: -289190552671280423
+    second: BustedMonitor1_21
+  - first:
+      213: -5368530261568384639
+    second: BustedMonitor1_22
+  - first:
+      213: 5694598925924360318
+    second: BustedMonitor1_23
+  - first:
+      213: 8693647842811496006
+    second: BustedMonitor1_24
+  - first:
+      213: 4416101861458772753
+    second: BustedMonitor1_25
+  - first:
+      213: 5112952354736809485
+    second: BustedMonitor1_26
+  - first:
+      213: -2566013114592105054
+    second: BustedMonitor1_27
+  - first:
+      213: -3048431543002319725
+    second: BustedMonitor1_28
+  - first:
+      213: 4641219081115609524
+    second: BustedMonitor1_29
+  - first:
+      213: 2161748819421493354
+    second: BustedMonitor1_30
+  - first:
+      213: 8588108637556155917
+    second: BustedMonitor1_31
+  - first:
+      213: 6643458751404084659
+    second: BustedMonitor1_32
+  - first:
+      213: 2537090384431075853
+    second: BustedMonitor1_33
+  - first:
+      213: -3397858001852124646
+    second: BustedMonitor1_34
+  - first:
+      213: 2107252446336726533
+    second: BustedMonitor1_35
+  - first:
+      213: 8058278297629623562
+    second: BustedMonitor1_36
+  - first:
+      213: -5692736731967328925
+    second: BustedMonitor1_37
+  - first:
+      213: 5701213659431588083
+    second: BustedMonitor1_38
+  - first:
+      213: 4585058800971633702
+    second: BustedMonitor1_39
+  - first:
+      213: -9006872800984121352
+    second: BustedMonitor1_40
+  - first:
+      213: -1622582424248420250
+    second: BustedMonitor1_41
+  - first:
+      213: -8707642765723298910
+    second: BustedMonitor1_42
+  - first:
+      213: 5500288570194288707
+    second: BustedMonitor1_43
+  - first:
+      213: 3873464971366749956
+    second: BustedMonitor1_44
+  - first:
+      213: 9054027381176416165
+    second: BustedMonitor1_45
+  - first:
+      213: -1510561337104357948
+    second: BustedMonitor1_46
+  - first:
+      213: 4058396198230474415
+    second: BustedMonitor1_47
+  - first:
+      213: 8838452385179978125
+    second: BustedMonitor1_48
+  - first:
+      213: -4271498879737255170
+    second: BustedMonitor1_49
+  - first:
+      213: -986882064557356393
+    second: BustedMonitor1_50
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 196
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 256
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 256
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 256
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: BustedMonitor1_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20633228a180fbac0800000000000000
+      internalID: -3837339447550855678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BustedMonitor1_1
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 128
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3b007f41a9928500800000000000000
+      internalID: 397048635263552319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BustedMonitor1_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 266a54da4162f2270800000000000000
+      internalID: 8227836914477409890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BustedMonitor1_3
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf028caf8ac27fee0800000000000000
+      internalID: -1227463269161623300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

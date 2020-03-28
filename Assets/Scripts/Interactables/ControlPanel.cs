@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Invasion
 {
     /// <summary>
-    /// Sends a signal to every object in its list of objects that can recieve signals.
+    /// This child class sends a signal to every object in its list of objects that can recieve signals.
     /// </summary>
     [RequireComponent(typeof(Collider2D))]
     public class ControlPanel : SignalSender
@@ -17,8 +17,8 @@ namespace Invasion
          ********************/
 
         // ========== PRIVATE ==========
-        bool isPlayerPresent = false;
-        PlayerInput playerInput;
+        bool isPlayerPresent = false;                   // used to determine if the player is in the activatable zone.
+        PlayerInput playerInput;                        // REPLACE THIS WITH YOUR CHARACTER CONTROLLER!
 
         // ========== PUBLIC ==========
         [Header("Objects To Signal")]
@@ -29,27 +29,34 @@ namespace Invasion
          * =- Functions -=
          ********************/
 
+        // Allow the player to trigger the SignalSender.
         void Update()
         {
             if (!isPlayerPresent)                       // the player isn't present, don't worry about it.
                 return;
 
-            if (playerInput && playerInput.IsPressingActionKey())
-            {
-                int count = signalReceivers.Count;
-                for (int i = 0; i < count; i++)
-                {
-                    SendSignal(signalReceivers[i]);
-                }
-            }
+            if (playerInput && playerInput.IsPressingActionKey()) // MAKE SURE ARE REFERENCING YOUR CHARACTER CONTROLLER AND YOU HAVE THIS METHOD ON IT!
+                Activate();
+        }
+
+        // Send a signal to every SignalReceiver in the list.
+        void Activate()
+        {
+            int count = signalReceivers.Count;
+            for (int i = 0; i < count; i++)
+                SendSignal(signalReceivers[i]);
         }
 
         // Track when the player enters the trigger.
         void OnTriggerEnter2D(Collider2D collision)
         {
-            playerInput = collision.GetComponent<PlayerInput>();
-            if (playerInput)
-                isPlayerPresent = true;
+            // MAKE SURE YOU ARE SEARCHING FOR YOUR CHARACTER CONTROLLER!
+            if (!collision.GetComponent<PlayerInput>()) // not the player, ignore it.
+                return;
+
+            isPlayerPresent = true;                     // note that the player just entered.
+            if (!playerInput)                           // only store the player once.
+                playerInput = collision.GetComponent<PlayerInput>(); // AGAIN, YOUR CHARACTER CONTROLLER!
 
             // Reveal the UI widget.
         }
@@ -57,11 +64,13 @@ namespace Invasion
         // Track when the player leave the trigger.
         void OnTriggerExit2D(Collider2D collision)
         {
-            if (collision.GetComponent<PlayerInput>())
-            {
-                isPlayerPresent = false;
-                playerInput = null;
-            }
+            // MAKE SURE YOU ARE SEARCHING FOR YOUR CHARACTER CONTROLLER!
+            if (!collision.GetComponent<PlayerInput>()) // not the player, ignore it.
+                return;
+
+            isPlayerPresent = false;
+
+            // Hide the UI widget.
         }
     }
 }

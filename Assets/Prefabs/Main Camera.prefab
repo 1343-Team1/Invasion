@@ -131,6 +131,12 @@ MonoBehaviour:
   rightPanLimit: 10
   upPanLimit: 10
   downPanLimit: -10
+  shakeLowerLimit: 0.4
+  shakeMinFrequency: 0.7
+  shakeMaxFrequency: 1.2
+  shakeBaseAmplitude: 0.1
+  shakeMinAmplitude: 0.3
+  shakeMaxAmplitude: 0.8
 --- !u!114 &548655961135399983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,7 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 125c4fbaf27a0d14c80690e8865d0cbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  intensity: 0.1
+  intensity: 0
   activeActors: []
   navPoints: []
 --- !u!114 &548655961135399980
@@ -173,6 +179,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actors: []
+  swarmlingParentObject: {fileID: 0}
+  swarmlingPrefab: {fileID: 8597442377834955983, guid: 51661d3fb032a3f449c87c1352ba6910,
+    type: 3}
+  desiredSwarmlingCount: 0
+  actualSwarmlingCount: 0
+  minimumSwarmlings: 10
+  swarmlingCountMultiplier: 30
+  minDistanceToSpawn: 5
+  maxDistanceToSpawn: 10
 --- !u!1 &548655962211505690
 GameObject:
   m_ObjectHideFlags: 0

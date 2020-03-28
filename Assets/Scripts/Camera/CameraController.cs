@@ -15,13 +15,15 @@ namespace Invasion
          * =- Variables -=
          ********************/
 
-        // Private/protected variables.
+        // ========== PRIVATE / PROTECTED ==========
+        GameManager gameManager;
         Transform playerTransform;
         float cameraZ;
 
         // ========== PUBLIC ==========
-        [Header("Camera Settings")]
+
         // Changes the camera mode between standard and elastic.
+        [Header("Camera Settings")]
         public bool isElastic;
 
         // Base speed of the camera.
@@ -45,6 +47,14 @@ namespace Invasion
         // How far down the camera can pan.
         public float downPanLimit;
 
+        [Header("Camera Shake")]
+        public float shakeLowerLimit;                   // when shaking starts.
+        public float shakeMinFrequency;                 // the min speed of the shake.
+        public float shakeMaxFrequency;                 // the max speed of the shake.
+        public float shakeBaseAmplitude;                // the base amount of shaking at the lower limit.
+        public float shakeMinAmplitude;                 // the multiplier applied to magnify intensity for the minimuma amount.
+        public float shakeMaxAmplitude;                 // the multiplier applied to magnify intensity for the maximum amount.
+
         /********************
          * =- Functions -=
          ********************/
@@ -52,6 +62,7 @@ namespace Invasion
         // Get the player and store the camera's z.
         void Start()
         {
+            gameManager = FindObjectOfType<GameManager>();
             playerTransform = FindObjectOfType<PlayerInput>().transform;
             cameraZ = transform.position.z;
         }
@@ -67,6 +78,9 @@ namespace Invasion
             if (isLimited)
                 LimitCamera();
         }
+
+        // Determine whether the camera should be shaking.
+        bool IsShaking() { return (gameManager.intensity >= shakeLowerLimit) ? true : false; }
 
         // Force the camera to remain inside of the pan limits.
         void LimitCamera()
@@ -84,7 +98,10 @@ namespace Invasion
         // Follow the target perfectly.
         void FollowNormally()
         {
-            transform.position = new Vector3(playerTransform.position.x, playerTransform.position.y, cameraZ);
+            Vector3 position = new Vector3(playerTransform.position.x, playerTransform.position.y, cameraZ);
+
+            transform.position = (IsShaking()) ? Shake(position) :
+                new Vector3(position.x, position.y, cameraZ);
         }
 
         // Follow the target with elasticity.
@@ -94,9 +111,28 @@ namespace Invasion
             float distance = Vector2.Distance(transform.position, targetPosition);
             float effectiveSpeed = (InterpolateOverCurve(0, 1, Mathf.Clamp(distance, 0, 1)) * followSpeed);
 
-            Vector2 newPosition = Vector2.MoveTowards(transform.position, targetPosition, effectiveSpeed * Time.deltaTime);
+            Vector2 position = Vector2.MoveTowards(transform.position, targetPosition, effectiveSpeed * Time.deltaTime);
 
-            transform.position = new Vector3(newPosition.x, newPosition.y, cameraZ);
+            transform.position = (IsShaking()) ? Shake(position) :
+                new Vector3(position.x, position.y, cameraZ);
+        }
+
+        Vector3 Shake(Vector2 position)
+        {
+            float xAmplitude = Random.Range(
+                shakeBaseAmplitude * shakeMinAmplitude * gameManager.intensity,
+                shakeBaseAmplitude * shakeMaxAmplitude * gameManager.intensity
+                );
+
+            float yAmplitude = Random.Range(
+                shakeBaseAmplitude * shakeMinAmplitude * gameManager.intensity,
+                shakeBaseAmplitude * shakeMaxAmplitude * gameManager.intensity
+                );
+
+            float x = xAmplitude * Mathf.Sin(Time.time * Random.Range(shakeMinAmplitude, shakeMaxAmplitude) * Mathf.PI);
+            float y = yAmplitude * Mathf.Sin(Time.time * Random.Range(shakeMinAmplitude, shakeMaxAmplitude) * Mathf.PI);
+
+            return new Vector3(position.x + x, position.y + y, cameraZ);
         }
 
         // Author: Sarper-Soher & lordofduct, September 12, 2015, https://forum.unity.com/threads/logarithmic-interpolation.354344/
