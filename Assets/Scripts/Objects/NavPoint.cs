@@ -24,6 +24,7 @@ namespace Invasion
 
         // ========== PUBLIC ==========
         public bool isSwarmlingNavPoint;
+        public bool isGoodPath;
 
 
         /********************
@@ -55,27 +56,36 @@ namespace Invasion
             player = FindObjectOfType<PlayerInput>().GetComponent<ActorController>().targetingPoint;
         }
 
+        void Update()
+        {
+            if (!player)
+                return;
+
+            if (!isSwarmlingNavPoint)
+                return;
+
+            // Whether this NavPoint can see the player.
+            if (ActorManager.IsTargetVisible(transform.position, player.transform.position))
+            {
+                isGoodPath = true;
+                return;
+            }
+            else
+                isGoodPath = false;
+
+            // Whether it's parents can see the someone that sees the player.
+            foreach (NavPoint navPoint in nextVisiblePoints)
+            {
+                if (navPoint.IsGoodPath())
+                    isGoodPath = true;
+            }
+
+        }
+
         // Is this a valid path toward the player?
         public bool IsGoodPath()
         {
-            if (!player)                            // early out if the player variable hasn't been set yet.
-                return false;
-
-            // This NavPoint can see the player.
-            if (ActorManager.IsTargetVisible(transform.position, player.transform.position))
-                return true;
-
-            if (nextVisiblePoints.Count <= 0)       // there are no higher visible NavPoints.
-                return false;
-
-            // Follow the NavPoints up and see if one leads to the player.
-            foreach (NavPoint navPoint in nextVisiblePoints)
-            {
-                if (IsGoodPath())
-                    return true;
-            }
-
-            return false;
+            return isGoodPath;
         }
 
         // Is this navpoint in the right position to spawn?

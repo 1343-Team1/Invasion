@@ -46,11 +46,14 @@ namespace Invasion
 
         public void Initialize()
         {
-            isSwarmlingAlive = true;
-            actorManager.actualSwarmlingCount++;
+            if (isSwarmling)
+            {
+                isSwarmlingAlive = true;
+                actorManager.actualSwarmlingCount++;
 
-            // Get a navpoint if one is visible.
-            navPoint = GameManager.GetValidNavPoint(transform.position, navPointProximityLimit);
+                // Get a navpoint if one is visible.
+                navPoint = GameManager.GetValidNavPoint(transform.position, navPointProximityLimit);
+            }
         }
 
         // See if this AIBrain already has a target.
@@ -60,7 +63,13 @@ namespace Invasion
         }
 
         // If the target should be fired at and this AIBrain can fire, then return true.
-        public bool IsFiring() { return false; }
+        public bool IsFiring()
+        {
+            if (HasTarget() && ActorManager.IsTargetVisible(transform.position, currentTargetPoint.transform.position, stats.sightRange))
+                return true;
+
+            return false;
+        }
 
         // If this AIBrain can run, and is running, then return true.
         public bool IsRunning() { return false; }
@@ -111,6 +120,9 @@ namespace Invasion
         // Draw a yellow circle to show nav points in the editor.
         void OnDrawGizmos()
         {
+            if (!isSwarmling)                           // Only draw gizmos for Swarmlings.
+                return;
+
             Gizmos.color = Color.yellow;
 
             if (currentTargetPoint)

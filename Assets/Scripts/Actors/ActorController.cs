@@ -22,7 +22,7 @@ namespace Invasion
         Rigidbody2D rigidbody2d;                                // a reference to the rigidbody component.
         Animator animator;                                      // a reference to the animator.
         Stats stats;                                            // a reference to the actors stats for speed. If this component isn't present, maximumSpeed will be used.
-        Vector2 input = new Vector2();                          // regularly updated by the ActorInput component.
+       [SerializeField] Vector2 input = new Vector2();                          // regularly updated by the ActorInput component.
         bool accelerating = false;                              // used to determine whether to slow down.
         bool waitingToJump = false;                             // used to determine whether the actor is jumping.
         bool isRunning = false;                                 // used to determine whether the actor is running.
@@ -45,6 +45,7 @@ namespace Invasion
         public GameObject targetingPoint;                       // a reference to the point from which targeting raycasting will be done.
 
         [Header("General Movement Settings")]
+        public bool isStationary = false;                       // whether this actor is stationary.
         public bool hasWalkAnimation = false;                   // whether this actor walks or just runs.
         public bool isWallCrawler = false;                      // whether this actor is restricted to grounded horizontal movement.
         public bool rotateTowardMovement = false;               // whether this actor will rotate to point in whichever direction it is moving.
@@ -71,6 +72,7 @@ namespace Invasion
         public bool canFireWhileInAir = false;                  // whether the actor can fire while jumping or falling.
         public GameObject projectilePrefab;                     // the prefab of the projectile the ranged attack makes.
         public GameObject projectileOrigin;                     // the object that is the spawn origin of the projectile.
+        public bool usesFireAngles = false;                     // whether the actor uses the fire angles below.
         public Vector2 fireAngleUpCoords;                       // the relative coordinates of the origin when firing "up" at an angle.
         public float fireAngleUpXAngle;                         // the x angle of the upward firing position.
         public Vector2 fireAngleCenterCoords;                   // the relative coordinates of the origin when firing "ahead" to the right.
@@ -104,7 +106,8 @@ namespace Invasion
             editorGravity = rigidbody2d.gravityScale;
             timeCanFireAgain = Time.time;
 
-            animator.SetBool("Has Walk Animation", hasWalkAnimation);
+            if (animator)
+                animator.SetBool("Has Walk Animation", hasWalkAnimation);
         }
 
         // ========== ANIMATIONS ==========
@@ -112,9 +115,19 @@ namespace Invasion
         void Update()
         {
             // ---- Unique ----
-            animator.SetBool("Dead", isDead);                   // inform the animator whether the actor is alive or dead.
+            if (animator)
+                animator.SetBool("Dead", isDead);                   // inform the animator whether the actor is alive or dead.
+
             if (isDead)
                 return;                                         // don't worry about the rest of Update if the actor is dead.
+
+            if (isStationary)                                   // turrets just flip to face the target.
+            {
+                FlipTowardMovement();
+
+                PositionProjectileOrigin();                     // this is not related to physics.
+                return;
+            }
 
             UpdateGravity();
 
@@ -135,6 +148,20 @@ namespace Invasion
             StopShooting();                                     // stop shooting if the gun wasn't fired recently.
         }
 
+        // Flip to face movement.
+        void FlipTowardMovement()
+        {
+            if (input.x > 0)
+            {
+                transform.localScale = new Vector3(1, 1, 1);
+                facingRight = true;
+            }
+            else {
+                transform.localScale = new Vector3(-1, 1, 1);
+                facingRight = false;
+            }
+        }
+
         // Rotate to face movement.
         void RotateTowardMovement()
         {
@@ -148,10 +175,7 @@ namespace Invasion
 
             transform.rotation = rotation;
 
-            if (input.x < 0)
-                transform.localScale = new Vector3(-1, 1, 1);
-            else
-                transform.localScale = new Vector3(1, 1, 1);
+            FlipTowardMovement();
         }
 
         // Stop shooting.
@@ -176,7 +200,8 @@ namespace Invasion
                 return;                                         // early out.
 
             timeCanFireAgain = Time.time + fireDelay;           // calculate the next time to fire.
-            animator.SetBool("Shooting", true);                 // make sure the shooting animation plays.
+            if (animator)
+                animator.SetBool("Shooting", true);                 // make sure the shooting animation plays.
 
             // Instantiate the projectile.
             float originX = projectileOrigin.transform.localPosition.x;
@@ -188,7 +213,11 @@ namespace Invasion
             GameObject obj = Instantiate(projectilePrefab, originPosition, Quaternion.identity);
             Projectile projectile = obj.GetComponent<Projectile>();
 
-            projectile.Initialize(GetFiringAngle());                 // set its angle.
+            if (usesFireAngles)
+                projectile.Initialize(GetFiringAngle());
+
+            else
+                projectile.Initialize((facingRight) ? fireAngleCenterXAngle : 180 + fireAngleCenterXAngle);
         }
 
         // Determine which firing angle is being used according to vertical input data.
@@ -205,6 +234,9 @@ namespace Invasion
         // Determine which firing angle is being used according to vertical input data.
         Vector3 GetFiringAngleCoords()
         {
+            if (!usesFireAngles)                                // only left and right.
+                return fireAngleCenterCoords;
+
             if (input.y > 0)                                    // firing up.
                 return fireAngleUpCoords;
             else if (input.y < 0)                               // firing down.
