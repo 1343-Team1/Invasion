@@ -20,6 +20,7 @@ namespace Invasion
         Collider2D collider2d;                              // the collider.
         float timeToDestroy;                                // the timer, predictive to avoid calculating every frame.
         bool hitAnimationTriggered = false;                 // used to determine whether to play the hit animation or destroy the gameObject.
+        Faction faction;                                    // the faction that fired this projectile.
 
         // Public variables.
         [Header("Movement Settings")]
@@ -63,7 +64,15 @@ namespace Invasion
         void OnCollisionEnter2D(Collision2D collision)
         {
             AnimateHit();
-            // Register hit with collision.gameObject.GetComponent<Stats>();
+
+            ActorController actorController = collision.gameObject.GetComponent<ActorController>();
+
+            // Collision is not an actor, or is an actor of the same faction.
+            if (!actorController || actorController.GetComponent<Stats>().faction == faction)
+                return;
+
+            // Collision is with an enemy actor and this actor has a melee attack, deal damage!
+            actorController.GetComponent<Stats>().TakeDamage(damage);
         }
 
         // Inform the animator that the projectile hit something.
@@ -76,8 +85,9 @@ namespace Invasion
 
 
         // Initialize the angle of the bullet so that it will move "forward" (to its right).
-        public void Initialize(float xDegrees)
+        public void Initialize(Faction faction, float xDegrees)
         {
+            this.faction = faction;
             transform.Rotate(Vector3.forward, xDegrees);
 //            transform.localEulerAngles = new Vector3(xDegrees, transform.eulerAngles.y, transform.eulerAngles.z);
         }

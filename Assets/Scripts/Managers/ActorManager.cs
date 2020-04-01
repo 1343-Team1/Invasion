@@ -132,6 +132,10 @@ namespace Invasion
             int count = actors.Count;
             for (int i = 0; i < count; i++)
             {
+                // This actor is dead.
+                if (actors[i].IsDead())
+                    continue;
+
                 // This potential target is in the same faction.
                 if (actors[i].GetComponent<Stats>().faction == attackerStats.faction)
                     continue;                               // go to the next iteration.

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 257033602567645441}
   - component: {fileID: 257033602567645440}
   m_Layer: 15
-  m_Name: Player Projectile 1
+  m_Name: Turret Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -133,5 +133,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.3
   duration: 1
-  damage: 0
+  damage: 1
   destroyDelay: 0.2

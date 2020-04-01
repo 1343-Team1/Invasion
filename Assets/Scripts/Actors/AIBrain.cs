@@ -59,7 +59,16 @@ namespace Invasion
         // See if this AIBrain already has a target.
         bool HasTarget()
         {
-            return (!currentTargetPoint) ? false : true;
+            // No target.
+            if (!currentTargetPoint)
+                return false;
+
+            // Current target is dead.
+            if (currentTargetPoint.transform.parent.GetComponent<ActorController>().IsDead())
+                return false;
+
+            // Valid target already.
+            return true;
         }
 
         // If the target should be fired at and this AIBrain can fire, then return true.

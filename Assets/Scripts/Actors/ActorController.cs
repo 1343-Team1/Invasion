@@ -19,6 +19,7 @@ namespace Invasion
 
         // ========== PRIVATE / PROTECTED ==========
         GameManager GM;                                         // a reference to the GameManager.
+        Collider2D collider2d;                                  // a reference to the collider.
         Rigidbody2D rigidbody2d;                                // a reference to the rigidbody component.
         Animator animator;                                      // a reference to the animator.
         Stats stats;                                            // a reference to the actors stats for speed. If this component isn't present, maximumSpeed will be used.
@@ -33,6 +34,7 @@ namespace Invasion
         float editorGravity;                                    // used to store the editor gravity for the actor.
         float timeCanFireAgain;                                 // used to allow firing with a delay between projectiles.
         bool facingRight = true;                                // used to coordinate projectile origin when still.                           
+        float timeCanMeleeAgain;                                // used to allow melee attacking with a delay between strikes.
 
         // ========== PUBLIC ==========
         [Header("! IF NO STATS COMPONENT !")]
@@ -67,8 +69,14 @@ namespace Invasion
         public float jumpVelocityMaximum;                       // stops the force-based jump from compounding too strongly.
         public float jumpGravity;                               // adjust the gravity effect for force jumping.
 
-        [Header("Ranged Attack")]
+        [Header("Melee Attack Settings")]
+        public bool hasMeleeAttack = false;                     // if the actor has a melee attack.
+        public int meleeDamage;                                 // the amount of damage this actor deals on contact.
+        public float meleeAttackDelay;                          // how long to wait between melee attacks.
+
+        [Header("Ranged Attack Settings")]
         public bool hasRangedAttack = false;                    // if the actor has a ranged attack.
+        public AudioClip fireAudio;                             // the audio clip for firing the gun.
         public bool canFireWhileInAir = false;                  // whether the actor can fire while jumping or falling.
         public GameObject projectilePrefab;                     // the prefab of the projectile the ranged attack makes.
         public GameObject projectileOrigin;                     // the object that is the spawn origin of the projectile.
@@ -100,11 +108,13 @@ namespace Invasion
         void Start()
         {
             GM = FindObjectOfType<GameManager>();
+            collider2d = GetComponent<Collider2D>();
             rigidbody2d = GetComponent<Rigidbody2D>();
             animator = GetComponent<Animator>();
             stats = GetComponent<Stats>();
             editorGravity = rigidbody2d.gravityScale;
             timeCanFireAgain = Time.time;
+            timeCanMeleeAgain = Time.time;
 
             if (animator)
                 animator.SetBool("Has Walk Animation", hasWalkAnimation);
@@ -146,6 +156,34 @@ namespace Invasion
             // ---- Firing ---- (It is important that these settings match the animator)
             PositionProjectileOrigin();                         // this is not related to physics.
             StopShooting();                                     // stop shooting if the gun wasn't fired recently.
+        }
+
+        void OnCollisionEnter2D(Collision2D collision)
+        {
+            // Dead and falling.
+            if (isDead)
+            {
+                if (collision.gameObject.layer != LayerMask.GetMask("Actors"))
+                    Deactivate();
+            }
+
+            // If no melee attack, don't worry about it.
+            if (!hasMeleeAttack)
+                return;
+
+            // If too soon, don't worry about it.
+            if (Time.time < timeCanMeleeAgain)
+                return;
+
+            ActorController actorController = collision.gameObject.GetComponent<ActorController>();
+
+            // Collision is not an actor, or is an actor of the same faction.
+            if (!actorController || actorController.stats.faction == stats.faction)
+                return;
+
+            // Collision is with an enemy actor and this actor has a melee attack, deal damage!
+            actorController.stats.TakeDamage(meleeDamage);
+            timeCanMeleeAgain = Time.time + meleeAttackDelay;
         }
 
         // Flip to face movement.
@@ -214,10 +252,12 @@ namespace Invasion
             Projectile projectile = obj.GetComponent<Projectile>();
 
             if (usesFireAngles)
-                projectile.Initialize(GetFiringAngle());
+                projectile.Initialize(stats.faction, GetFiringAngle());
 
             else
-                projectile.Initialize((facingRight) ? fireAngleCenterXAngle : 180 + fireAngleCenterXAngle);
+                projectile.Initialize(stats.faction, (facingRight) ? fireAngleCenterXAngle : 180 + fireAngleCenterXAngle);
+
+            AudioManager.PlaySFX(fireAudio);
         }
 
         // Determine which firing angle is being used according to vertical input data.
@@ -473,5 +513,18 @@ namespace Invasion
             this.input = input;
         }
 
+        // Inform the ActorController that it is dead.
+        public void Kill() {
+            isDead = true;
+        }
+
+        void Deactivate()
+        {
+            collider2d.isTrigger = true;
+            rigidbody2d.constraints = RigidbodyConstraints2D.FreezeAll;
+        }
+
+        // Getter.
+        public bool IsDead() { return isDead; }
     }
 }

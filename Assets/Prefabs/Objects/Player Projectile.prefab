@@ -133,5 +133,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.3
   duration: 1
-  damage: 0
+  damage: 1
   destroyDelay: 0.2

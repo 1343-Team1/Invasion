@@ -13,14 +13,21 @@ namespace Invasion
     {
         /********************
          * =- Variables -=
-         ********************/
+        ********************/
 
-        // Private/protected variables.
+        // ========== PRIVATE / PROTECTED ==========
+        ActorController actorController;                        // the ActorController for this actor.
+        Shield shield;                                          // a shield that may be protecting the actor.
+        [SerializeField] int currentHealth;                     // the real-time health of this actor.
 
-        // Public variables.
+        // ========== PUBLIC ==========
         [Header("Faction Settings")]
         public Faction faction;
-        public bool isSwarm = false;
+        //public bool isSwarm = false;
+
+        [Header("Health")]
+        public bool isAlive = true;                             // whether this character is alive.
+        public int maxHealth;                                   // the starting health of this actor.
 
         [Header("Movement")]
         public float runMultiplier;                             // the speed this Actor will run.
@@ -33,11 +40,38 @@ namespace Invasion
         [Header("Vision")]
         public float sightRange;                                // the distance this Actor can see.
 
-        // Exposed private/protected variables.
-        //[Header("Debug Data")]
 
         /********************
          * =- Functions -=
          ********************/
+
+        // Initialize the actor.
+        void Start()
+        {
+            actorController = GetComponent<ActorController>();
+            shield = GetComponent<Shield>();
+            currentHealth = maxHealth;
+        }
+
+        public void TakeDamage(int damage)
+        {
+            // Shield is up, take damage to it instead.
+            if (shield && shield.IsActive())
+            {
+                shield.TakeDamage(damage);
+                return;
+            }
+
+            // Shield is down, take damage to health.
+            currentHealth = Mathf.Clamp(currentHealth - damage, 0, currentHealth);
+
+            // Actor died, destroy the shield.
+            if (currentHealth <= 0)
+            {
+                Destroy(shield);
+                actorController.Kill();
+                return;
+            }
+        }
     }
 }
