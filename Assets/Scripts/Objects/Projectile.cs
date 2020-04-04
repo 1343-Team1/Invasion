@@ -64,6 +64,7 @@ namespace Invasion
         void OnCollisionEnter2D(Collision2D collision)
         {
             AnimateHit();
+            Debug.Log("hit");
 
             ActorController actorController = collision.gameObject.GetComponent<ActorController>();
 

@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\Actors\AIInput.cs" />
     <Compile Include="Assets\Scripts\Actors\ActorController.cs" />
     <Compile Include="Assets\Scripts\Actors\ActorInput.cs" />
+    <Compile Include="Assets\Scripts\Actors\Damager.cs" />
     <Compile Include="Assets\Scripts\Actors\PlayerInput.cs" />
     <Compile Include="Assets\Scripts\Actors\Shield.cs" />
     <Compile Include="Assets\Scripts\Actors\Stats.cs" />

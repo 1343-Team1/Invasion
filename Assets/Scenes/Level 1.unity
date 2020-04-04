@@ -1153,6 +1153,11 @@ PrefabInstance:
       propertyPath: meleeDamage
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8597442377834955828, guid: 51661d3fb032a3f449c87c1352ba6910,
+        type: 3}
+      propertyPath: moveByForce
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8597442377834955976, guid: 51661d3fb032a3f449c87c1352ba6910,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6706,62 +6711,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 8732881126794025354, guid: be82fdc016264cd4585b2e50d64a485d,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8732881126794025356, guid: be82fdc016264cd4585b2e50d64a485d,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 2.6666667
-      objectReference: {fileID: 0}
-    - target: {fileID: 8732881126794025356, guid: be82fdc016264cd4585b2e50d64a485d,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 2.6666667
-      objectReference: {fileID: 0}
-    - target: {fileID: 8732881126794025356, guid: be82fdc016264cd4585b2e50d64a485d,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8732881126794025356, guid: be82fdc016264cd4585b2e50d64a485d,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8732881126794025356, guid: be82fdc016264cd4585b2e50d64a485d,
-        type: 3}
-      propertyPath: m_Offset.x
-      value: -0.03
-      objectReference: {fileID: 0}
-    - target: {fileID: 8732881126794025356, guid: be82fdc016264cd4585b2e50d64a485d,
-        type: 3}
-      propertyPath: m_Offset.y
-      value: -0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8732881126794025358, guid: be82fdc016264cd4585b2e50d64a485d,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 8808929173557640368, guid: 7ceaabc62a2a79e4f8aec08731d645c0,
-        type: 3}
-    - target: {fileID: 8732881126794025358, guid: be82fdc016264cd4585b2e50d64a485d,
-        type: 3}
-      propertyPath: m_FlipY
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8732881126794025358, guid: be82fdc016264cd4585b2e50d64a485d,
-        type: 3}
-      propertyPath: m_SortingLayerID
-      value: -2022814425
-      objectReference: {fileID: 0}
-    - target: {fileID: 8732881126794025358, guid: be82fdc016264cd4585b2e50d64a485d,
-        type: 3}
-      propertyPath: m_SortingLayer
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 8732881126794025359, guid: be82fdc016264cd4585b2e50d64a485d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7007,7 +6956,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1368119418
 Transform:
   m_ObjectHideFlags: 0
@@ -16569,6 +16518,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1407416295287879143, guid: 28fe91b1aac08be4e985fc44127acdbc,
+        type: 3}
+      propertyPath: hasRangedAttack
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5954093541201988519, guid: 28fe91b1aac08be4e985fc44127acdbc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -16628,11 +16582,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Turret
-      objectReference: {fileID: 0}
-    - target: {fileID: 5954093541201988522, guid: 28fe91b1aac08be4e985fc44127acdbc,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28fe91b1aac08be4e985fc44127acdbc, type: 3}
@@ -16870,6 +16819,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 277909085906699010, guid: be82fdc016264cd4585b2e50d64a485d,
+        type: 3}
+      propertyPath: m_BodyType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 277909085906699010, guid: be82fdc016264cd4585b2e50d64a485d,
+        type: 3}
+      propertyPath: m_UseFullKinematicContacts
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 277909085906699010, guid: be82fdc016264cd4585b2e50d64a485d,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8732881126794025354, guid: be82fdc016264cd4585b2e50d64a485d,
         type: 3}
       propertyPath: m_Name
@@ -16925,6 +16889,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SortingLayer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8732881126794025358, guid: be82fdc016264cd4585b2e50d64a485d,
+        type: 3}
+      propertyPath: m_FlipY
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8732881126794025359, guid: be82fdc016264cd4585b2e50d64a485d,
         type: 3}

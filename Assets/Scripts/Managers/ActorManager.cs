@@ -133,7 +133,7 @@ namespace Invasion
             for (int i = 0; i < count; i++)
             {
                 // This actor is dead.
-                if (actors[i].IsDead())
+                if (actors[i].IsDead)
                     continue;
 
                 // This potential target is in the same faction.

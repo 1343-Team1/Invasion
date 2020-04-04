@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8597442377834955981}
   - component: {fileID: 8597442377834955980}
   - component: {fileID: 8597442377834955828}
+  - component: {fileID: 8787423006581434442}
   - component: {fileID: 8597442377834955831}
   - component: {fileID: 8597442377834955830}
   - component: {fileID: 8597442377834955977}
@@ -120,7 +121,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 0.3
   m_LinearDrag: 1
-  m_AngularDrag: 0.75
+  m_AngularDrag: 0.5
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -158,8 +159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5632c61e6485a3649929b388fa62d8c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  input: {x: 0, y: 0}
-  isDead: 0
+  stats: {fileID: 0}
   runMultiplier: 0
   walkSpeed: 0
   jumpStrength: 0
@@ -180,9 +180,24 @@ MonoBehaviour:
   jumpForceMultiplier: 0
   jumpVelocityMaximum: 0
   jumpGravity: 0
+  velocity: {x: 0, y: 0}
+--- !u!114 &8787423006581434442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8597442377834955983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b9784c7c41fec4fb4a72201adc9901, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   hasMeleeAttack: 1
   meleeDamage: 1
-  meleeAttackDelay: 1
+  meleeReboundDuration: 0.25
+  meleeReboundDistance: 25
+  meleeAttackDelay: 0.5
   hasRangedAttack: 0
   fireAudio: {fileID: 0}
   canFireWhileInAir: 0
@@ -196,7 +211,6 @@ MonoBehaviour:
   fireAngleDownCoords: {x: 0, y: 0}
   fireAngleDownXAngle: 0
   fireDelay: 0
-  velocity: {x: 0, y: 0}
 --- !u!114 &8597442377834955831
 MonoBehaviour:
   m_ObjectHideFlags: 0

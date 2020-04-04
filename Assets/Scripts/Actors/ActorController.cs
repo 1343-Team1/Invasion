@@ -22,21 +22,26 @@ namespace Invasion
         Collider2D collider2d;                                  // a reference to the collider.
         Rigidbody2D rigidbody2d;                                // a reference to the rigidbody component.
         Animator animator;                                      // a reference to the animator.
-        Stats stats;                                            // a reference to the actors stats for speed. If this component isn't present, maximumSpeed will be used.
-       [SerializeField] Vector2 input = new Vector2();                          // regularly updated by the ActorInput component.
+        Damager damager;                                        // a reference to the damager (if present).
+        Vector2 input = new Vector2();                          // regularly updated by the ActorInput component.
+        public Vector2 Input { get { return input; } }          // used to allow input to be seen publicly.
         bool accelerating = false;                              // used to determine whether to slow down.
         bool waitingToJump = false;                             // used to determine whether the actor is jumping.
         bool isRunning = false;                                 // used to determine whether the actor is running.
         bool isJumpBursting = false;                            // used to determine whether the actor is using a jetpack.
         bool isFalling = false;                                 // used to determine whether the actor is falling.
-        [SerializeField] bool isDead = false;                   // used to determine whether the actor is dead.
+        bool isDead = false;                                    // used to determine whether the actor is dead.
+        public bool IsDead { get { return isDead; } }           // used to allow isDead to be seen publicly.
         int numberOfJumps = 0;                                  // used to determine whether the actor can jump yet.
         float editorGravity;                                    // used to store the editor gravity for the actor.
-        float timeCanFireAgain;                                 // used to allow firing with a delay between projectiles.
-        bool facingRight = true;                                // used to coordinate projectile origin when still.                           
-        float timeCanMeleeAgain;                                // used to allow melee attacking with a delay between strikes.
+        bool facingRight = true;                                // used to coordinate projectile origin when still.
+        public bool FacingRight { get { return facingRight; } } // used to allow facingRight to be seen publicly.
+        bool meleeRebounding = false;                           // used to control jumpback after melee attacks.
 
         // ========== PUBLIC ==========
+        [Header("Automated")]
+        public Stats stats;                                     // a reference to the actors stats for speed. If this component isn't present, maximumSpeed will be used.
+
         [Header("! IF NO STATS COMPONENT !")]
         public float runMultiplier;                             // the running speed of the actor.
         public float walkSpeed;                                 // the walking speed of the actor.
@@ -69,35 +74,9 @@ namespace Invasion
         public float jumpVelocityMaximum;                       // stops the force-based jump from compounding too strongly.
         public float jumpGravity;                               // adjust the gravity effect for force jumping.
 
-        [Header("Melee Attack Settings")]
-        public bool hasMeleeAttack = false;                     // if the actor has a melee attack.
-        public int meleeDamage;                                 // the amount of damage this actor deals on contact.
-        public float meleeAttackDelay;                          // how long to wait between melee attacks.
-
-        [Header("Ranged Attack Settings")]
-        public bool hasRangedAttack = false;                    // if the actor has a ranged attack.
-        public AudioClip fireAudio;                             // the audio clip for firing the gun.
-        public bool canFireWhileInAir = false;                  // whether the actor can fire while jumping or falling.
-        public GameObject projectilePrefab;                     // the prefab of the projectile the ranged attack makes.
-        public GameObject projectileOrigin;                     // the object that is the spawn origin of the projectile.
-        public bool usesFireAngles = false;                     // whether the actor uses the fire angles below.
-        public Vector2 fireAngleUpCoords;                       // the relative coordinates of the origin when firing "up" at an angle.
-        public float fireAngleUpXAngle;                         // the x angle of the upward firing position.
-        public Vector2 fireAngleCenterCoords;                   // the relative coordinates of the origin when firing "ahead" to the right.
-        public float fireAngleCenterXAngle;                     // the x angle of the center firing position.
-        public Vector2 fireAngleDownCoords;                     // the relative coordinates of the origin when firing "down" at an angle.
-        public float fireAngleDownXAngle;                       // the x angle of the downward firing position.
-        public float fireDelay;                                 // how long to wait between bullets, and to stop the firing animation.
-        // public Vector2 fireAngleCrouchedUpCoords;
-        //public float fireAngleCrouchUpXAngle;        
-        // public Vector2 fireAngleCrouchedCenterCoords;
-        //public float fireAngleCrouchCenterXAngle;    
-        // public Vector2 fireAngleCrouchedDownCoords;
-        //public float fireAngleCrouchDownXAngle;      
-
         // Exposed private/protected variables.
         [Header("Debug Data")]
-        [SerializeField] [DisplayWithoutEdit()] Vector2 velocity = new Vector2();    // display the velocity.
+        [SerializeField][DisplayWithoutEdit()] Vector2 velocity = new Vector2();    // display the velocity.
 
 
         /********************
@@ -112,82 +91,47 @@ namespace Invasion
             rigidbody2d = GetComponent<Rigidbody2D>();
             animator = GetComponent<Animator>();
             stats = GetComponent<Stats>();
+            damager = GetComponent<Damager>();
             editorGravity = rigidbody2d.gravityScale;
-            timeCanFireAgain = Time.time;
-            timeCanMeleeAgain = Time.time;
 
             if (animator)
                 animator.SetBool("Has Walk Animation", hasWalkAnimation);
         }
 
-        // ========== ANIMATIONS ==========
+        // ========== MOVEMENT ANIMATION ==========
         // Animate the actor in the Update so that there is immediate response.
+        // This is the loop for animation logic.
         void Update()
         {
-            // ---- Unique ----
             if (animator)
-                animator.SetBool("Dead", isDead);                   // inform the animator whether the actor is alive or dead.
+                animator.SetBool("Dead", isDead);               // inform the animator whether the actor is alive or dead.
 
             if (isDead)
                 return;                                         // don't worry about the rest of Update if the actor is dead.
 
             if (isStationary)                                   // turrets just flip to face the target.
             {
-                FlipTowardMovement();
-
-                PositionProjectileOrigin();                     // this is not related to physics.
-                return;
+                FlipByInput();
+                return;                                         // Don't worry about other animations for turrets.
             }
 
             UpdateGravity();
 
             // ---- Movement ----
             if (rotateTowardMovement)
-                RotateTowardMovement();                         // rotate in direction of movement.
+                RotateByInput();                         // rotate in direction of movement.
             else
-                FaceActorTowardMovement();                      // flip in direction of movement.
-            InformAnimator();
+                FlipByVelocity();                      // flip in direction of movement.
+            UpdateAnimator();
             AnimateToIdle();
 
             // ---- Jumping ----
             AnimateJetpack();
             AnimateFalling();
-
-            // ---- Firing ---- (It is important that these settings match the animator)
-            PositionProjectileOrigin();                         // this is not related to physics.
-            StopShooting();                                     // stop shooting if the gun wasn't fired recently.
         }
 
-        void OnCollisionEnter2D(Collision2D collision)
-        {
-            // Dead and falling.
-            if (isDead)
-            {
-                if (collision.gameObject.layer != LayerMask.GetMask("Actors"))
-                    Deactivate();
-            }
-
-            // If no melee attack, don't worry about it.
-            if (!hasMeleeAttack)
-                return;
-
-            // If too soon, don't worry about it.
-            if (Time.time < timeCanMeleeAgain)
-                return;
-
-            ActorController actorController = collision.gameObject.GetComponent<ActorController>();
-
-            // Collision is not an actor, or is an actor of the same faction.
-            if (!actorController || actorController.stats.faction == stats.faction)
-                return;
-
-            // Collision is with an enemy actor and this actor has a melee attack, deal damage!
-            actorController.stats.TakeDamage(meleeDamage);
-            timeCanMeleeAgain = Time.time + meleeAttackDelay;
-        }
-
-        // Flip to face movement.
-        void FlipTowardMovement()
+        // Use the horizontal transform scale to flip the actor in the direction of their INPUT.
+        void FlipByInput()
         {
             if (input.x > 0)
             {
@@ -200,130 +144,8 @@ namespace Invasion
             }
         }
 
-        // Rotate to face movement.
-        void RotateTowardMovement()
-        {
-            // If there is no input, don't worry about it.
-            if (input == Vector2.zero)
-                return;
-
-            Quaternion rotation = Quaternion.LookRotation(input);
-            rotation.x = transform.rotation.x;
-            rotation.y = transform.rotation.y;
-
-            transform.rotation = rotation;
-
-            FlipTowardMovement();
-        }
-
-        // Stop shooting.
-        void StopShooting()
-        {
-            if (Time.time < timeCanFireAgain)                   // the animation should still be playing.
-                return;                                         // early out.
-
-            animator.SetBool("Shooting", false);
-        }
-
-        // Fire a projectile.
-        public void FireProjectile()
-        {
-            if (!hasRangedAttack)                               // doesn't have a ranged attack.
-                return;                                         // early out.
-
-            if (Time.time < timeCanFireAgain)                   // can't fire again yet.
-                return;                                         // early out.
-
-            if (!canFireWhileInAir && rigidbody2d.velocity.y != 0) // can't fire in the air.
-                return;                                         // early out.
-
-            timeCanFireAgain = Time.time + fireDelay;           // calculate the next time to fire.
-            if (animator)
-                animator.SetBool("Shooting", true);                 // make sure the shooting animation plays.
-
-            // Instantiate the projectile.
-            float originX = projectileOrigin.transform.localPosition.x;
-            float originY = projectileOrigin.transform.localPosition.y;
-            originX = ((facingRight) ? originX : -originX);
-
-            Vector3 originPosition = transform.position + new Vector3(originX, originY, 0);
-
-            GameObject obj = Instantiate(projectilePrefab, originPosition, Quaternion.identity);
-            Projectile projectile = obj.GetComponent<Projectile>();
-
-            if (usesFireAngles)
-                projectile.Initialize(stats.faction, GetFiringAngle());
-
-            else
-                projectile.Initialize(stats.faction, (facingRight) ? fireAngleCenterXAngle : 180 + fireAngleCenterXAngle);
-
-            AudioManager.PlaySFX(fireAudio);
-        }
-
-        // Determine which firing angle is being used according to vertical input data.
-        float GetFiringAngle()
-        {
-            if (input.y > 0.01)                                 // firing up.
-                return ((facingRight) ? fireAngleUpXAngle : 180 - fireAngleUpXAngle);
-            else if (input.y < -0.01)                           // firing down.
-                return ((facingRight) ? fireAngleDownXAngle : 180 - fireAngleDownXAngle);
-            else                                                // firing ahead.
-                return ((facingRight) ? fireAngleCenterXAngle : 180 + fireAngleCenterXAngle);
-        }
-
-        // Determine which firing angle is being used according to vertical input data.
-        Vector3 GetFiringAngleCoords()
-        {
-            if (!usesFireAngles)                                // only left and right.
-                return fireAngleCenterCoords;
-
-            if (input.y > 0)                                    // firing up.
-                return fireAngleUpCoords;
-            else if (input.y < 0)                               // firing down.
-                return fireAngleDownCoords;
-            else                                                // firing ahead.
-                return fireAngleCenterCoords;
-        }
-
-        // Position projectile origin according to vertical input data.
-        void PositionProjectileOrigin()
-        {
-            if (!projectileOrigin)                              // non-ranged actors have no projectile origin.
-                return;
-
-            projectileOrigin.transform.localPosition = GetFiringAngleCoords();
-        }
-
-        // Keep track of the actor's gravity based on force jump settings.
-        void UpdateGravity()
-        {
-            if (jumpByForce && rigidbody2d.gravityScale != jumpGravity)
-                rigidbody2d.gravityScale = jumpGravity;
-
-            else if (!jumpByForce && rigidbody2d.gravityScale != editorGravity)
-                rigidbody2d.gravityScale = editorGravity;
-        }
-
-        // Animate the jetpack.
-        void AnimateJetpack()
-        {
-            if (jetPackParticleBurster && isJumpBursting)
-                jetPackParticleBurster.BurstParticles();
-        }
-
-        // Update the animator with the current velocity of the actor.
-        void InformAnimator()
-        {
-            animator.SetFloat("Horizontal Velocity", Mathf.Abs(rigidbody2d.velocity.x));
-            animator.SetFloat("Vertical Velocity", rigidbody2d.velocity.y);
-            animator.SetFloat("Vertical Input", input.y);
-            animator.SetBool("Running", isRunning);
-            if (Mathf.Abs(rigidbody2d.velocity.x) > 0)
-                animator.SetBool("Walking", true);
-        }
-
-        // Use the horizontal transform scale to flip the actor in the direction of their velocity.
-        void FaceActorTowardMovement()
+        // Use the horizontal transform scale to flip the actor in the direction of their VELOCITY.
+        void FlipByVelocity()
         {
             if (rigidbody2d.velocity.x < 0 && transform.localScale.x != -1)
             {
@@ -335,6 +157,41 @@ namespace Invasion
                 transform.localScale = new Vector3(1, 1, 1);
                 facingRight = true;
             }
+        }
+
+        // Rotate to face movement.
+        void RotateByInput()
+        {
+            // If there is no input, don't worry about it.
+            if (input == Vector2.zero)
+                return;
+
+            Quaternion rotation = Quaternion.LookRotation(input);
+            rotation.x = transform.rotation.x;
+            rotation.y = transform.rotation.y;
+
+            transform.rotation = rotation;
+
+            FlipByInput();
+        }
+
+        // Animate the jetpack.
+        void AnimateJetpack()
+        {
+            if (jetPackParticleBurster && isJumpBursting)
+                jetPackParticleBurster.BurstParticles();
+        }
+
+        // ========== OUTPUT TO ANIMATOR ==========
+        // Update the animator with the current rigidbody data of the actor.
+        void UpdateAnimator()
+        {
+            animator.SetFloat("Horizontal Velocity", Mathf.Abs(rigidbody2d.velocity.x));
+            animator.SetFloat("Vertical Velocity", rigidbody2d.velocity.y);
+            animator.SetFloat("Vertical Input", input.y);
+            animator.SetBool("Running", isRunning);
+            if (Mathf.Abs(rigidbody2d.velocity.x) > 0)
+                animator.SetBool("Walking", true);
         }
 
         // Let the animator know the actor is falling.
@@ -369,11 +226,15 @@ namespace Invasion
 
         // ========== PHYSICS ==========
         // Move the actor according to input and state in the FixedUpdate, so it synchs with physics.
+        // This is the loop for physics.
         void FixedUpdate()
         {
             // ---- Unique ----
             if (isDead)
                 return;                                 // don't worry about the rest of Update if the actor is dead.
+
+            if (meleeRebounding)                        // the melee attack was successful, waiting to regain control.
+                return;
 
             // ---- Movement ----
             if (!moveByForce)       // the default movement method sets the velocity directly.
@@ -394,6 +255,16 @@ namespace Invasion
             }
         }
 
+        // Keep track of the actor's gravity based on force jump settings.
+        void UpdateGravity()
+        {
+            if (jumpByForce && rigidbody2d.gravityScale != jumpGravity)
+                rigidbody2d.gravityScale = jumpGravity;
+
+            else if (!jumpByForce && rigidbody2d.gravityScale != editorGravity)
+                rigidbody2d.gravityScale = editorGravity;
+        }
+
         // Jump by setting the velocity of the rigidbody2d directly from stats.jumpStrength if present, or jumpStrength.
         void JumpByVelocity()
         {
@@ -404,6 +275,7 @@ namespace Invasion
                 isJumpBursting = true;              // turn on the jetpack particles.
         }
 
+        // Jump by adding force to the sprite's collider.
         void JumpByForce()
         {
             float jumpForce = ((stats) ? stats.jumpStrength : jumpStrength) * jumpForceMultiplier;
@@ -417,19 +289,30 @@ namespace Invasion
             velocity = rigidbody2d.velocity;
         }
 
-        // Take jump input from an ActorInput component.
-        public void InformJump(bool isJumping)
+        // Hit the ground after falling when dead.
+        void OnCollisionEnter2D(Collision2D collision)
         {
-            if (!waitingToJump && isJumping && numberOfJumps < ((stats) ? stats.extraJumps : extraJumps)) // can this actor jump right now?
-            {
-                waitingToJump = true;                // this will be looked at to inform physics.
-                animator.SetBool("Jumping", true);   // this will be looked at to inform animation.
-                numberOfJumps++;                     // one less jump available.
-            }
+            if (!isDead)
+                return;
+
+            // Only stop when hitting a non-actor.
+            if (collision.gameObject.layer != LayerMask.GetMask("Actors"))
+                Deactivate();
+        }
+
+        // ========== INPUT ==========
+        // Take axis input from an ActorInput component.
+        public void Move(Vector2 input)
+        {
+            float oldX = Mathf.Abs(this.input.x);
+            float newX = Mathf.Abs(input.x);
+
+            accelerating = (newX != 0) || (newX > oldX);
+            this.input = input;
         }
 
         // Take run input from an ActorInput component.
-        public void InformRun(bool isRunning, bool isToggle = false)
+        public void Run(bool isRunning, bool isToggle = false)
         {
             if (!hasWalkAnimation)                  // walk animation off, always true.
             {
@@ -445,6 +328,44 @@ namespace Invasion
 
             if (isRunning)                          // if running is a toggle, toggle it.
                 this.isRunning = !this.isRunning;
+        }
+
+        // Take jump input from an ActorInput component.
+        public void Jump(bool isJumping)
+        {
+            if (!waitingToJump && isJumping && numberOfJumps < ((stats) ? stats.extraJumps : extraJumps)) // can this actor jump right now?
+            {
+                waitingToJump = true;                // this will be looked at to inform physics.
+                animator.SetBool("Jumping", true);   // this will be looked at to inform animation.
+                numberOfJumps++;                     // one less jump available.
+            }
+        }
+
+        // Take shooting input from a Damager component.
+        public void Shoot(bool isShooting)
+        {
+            if (isShooting == false)
+            {
+                if (animator)
+                    animator.SetBool("Shooting", false);
+                return;
+            }
+
+            // No Damager, so no ranged attack possible.
+            if (!damager)
+                return;
+
+            // Dead.
+            if (isDead)
+                return;
+
+            // Failed to fire.
+            if (!damager.FireProjectile())
+                return;
+
+            if (animator)
+                animator.SetBool("Shooting", true);                 // make sure the shooting animation plays.
+
         }
 
         // Move by setting the velocity of the rigidbody2d directly from stats.speed if present, or maximumVelocity.
@@ -503,16 +424,7 @@ namespace Invasion
             rigidbody2d.AddForce(-rigidbody2d.velocity * decelerationMultiplier);
         }
 
-        // Take axis input from an ActorInput component.
-        public void InformAxis(Vector2 input)
-        {
-            float oldX = Mathf.Abs(this.input.x);
-            float newX = Mathf.Abs(input.x);
-
-            accelerating = (newX != 0) || (newX > oldX);
-            this.input = input;
-        }
-
+        // ========== DEATH ==========
         // Inform the ActorController that it is dead.
         public void Kill() {
             isDead = true;
@@ -524,7 +436,10 @@ namespace Invasion
             rigidbody2d.constraints = RigidbodyConstraints2D.FreezeAll;
         }
 
-        // Getter.
-        public bool IsDead() { return isDead; }
+        // ========== MISC ==========
+        public void MeleeRebounding(bool meleeSuccessful)
+        {
+            this.meleeRebounding = meleeSuccessful;
+        }
     }
 }

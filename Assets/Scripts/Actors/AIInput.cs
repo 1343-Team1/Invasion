@@ -38,16 +38,16 @@ namespace Invasion
         void Update()
         {
             // ---- Movement ----
-            actorController.InformAxis(GetMovement());
-            actorController.InformRun(brain.IsRunning());
+            actorController.Move(GetMovement());
+            actorController.Run(brain.IsRunning());
 
             // ---- Jumping ----
             if (brain.IsJumping())
-                actorController.InformJump(true);
+                actorController.Jump(true);
 
             // ---- Firing ----
             if (brain.IsFiring())
-                actorController.FireProjectile();
+                actorController.Shoot(true);
         }
 
         Vector2 GetMovement()

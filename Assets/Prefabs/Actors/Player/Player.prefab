@@ -125,6 +125,7 @@ GameObject:
   - component: {fileID: 3724116165393636591}
   - component: {fileID: 3724116165393636588}
   - component: {fileID: 3724116165393636589}
+  - component: {fileID: 2621912258358682055}
   - component: {fileID: 3724116165393636586}
   - component: {fileID: 3724116165393629971}
   - component: {fileID: 3724116165393629972}
@@ -272,12 +273,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5632c61e6485a3649929b388fa62d8c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDead: 0
+  stats: {fileID: 0}
   runMultiplier: 2
   walkSpeed: 0.7
   jumpStrength: 5
   extraJumps: 0
   targetingPoint: {fileID: 3724116164146766407}
+  isStationary: 0
   hasWalkAnimation: 0
   isWallCrawler: 0
   rotateTowardMovement: 0
@@ -292,11 +294,29 @@ MonoBehaviour:
   jumpForceMultiplier: 1
   jumpVelocityMaximum: 10
   jumpGravity: 0.5
+  velocity: {x: 0, y: 0}
+--- !u!114 &2621912258358682055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3724116165393636587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b9784c7c41fec4fb4a72201adc9901, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasMeleeAttack: 0
+  meleeDamage: 0
+  meleeAttackDelay: 0
   hasRangedAttack: 1
+  fireAudio: {fileID: 8300000, guid: 9b82f1bc690d36b4585df9b47c8631ba, type: 3}
   canFireWhileInAir: 0
   projectilePrefab: {fileID: 5525196758710359387, guid: 37f0c313279619a4594e44863cb6ad8b,
     type: 3}
   projectileOrigin: {fileID: 3724116164860569289}
+  usesFireAngles: 1
   fireAngleUpCoords: {x: 0.8, y: 2}
   fireAngleUpXAngle: 45
   fireAngleCenterCoords: {x: 1, y: 1.35}
@@ -304,7 +324,6 @@ MonoBehaviour:
   fireAngleDownCoords: {x: 0.8, y: 0.7}
   fireAngleDownXAngle: -45
   fireDelay: 0.2
-  velocity: {x: 0, y: 0}
 --- !u!114 &3724116165393636586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -324,6 +343,7 @@ MonoBehaviour:
   isRunToggle: 1
   fireKey: 323
   isFireToggle: 0
+  actionKey: 102
   deadzone: {x: 0, y: 0}
   thumbstickSensitivity: {x: 0.5, y: 0.5}
 --- !u!114 &3724116165393629971
@@ -338,8 +358,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87dbb36a051330b4d83d14e367a3d5f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentHealth: 0
   faction: 0
-  isSwarm: 0
+  isAlive: 1
+  maxHealth: 0
   runMultiplier: 2
   walkSpeed: 0.7
   jumpStrength: 5

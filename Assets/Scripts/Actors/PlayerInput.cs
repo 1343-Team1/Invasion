@@ -29,6 +29,7 @@ namespace Invasion
         public bool isFireToggle = false;                               // semi or full auto.
         public KeyCode actionKey = KeyCode.F;                           // key to perform a context sensitive 'action'.
 
+        // Not set up yet.
         [Header("Controller Settings")]
         public Vector2 deadzone = new Vector2(0f, 0f);                  // thumbstick deadzone if a controller is being used.
         public Vector2 thumbstickSensitivity = new Vector2(0.5f, 0.5f); // thumbstick sensitivity if a controller is being used.
@@ -42,16 +43,14 @@ namespace Invasion
         void Update()
         {
             // ---- Movement ----
-            actorController.InformAxis(GetMovement());
-            actorController.InformRun(IsRunning(), isRunToggle);
+            actorController.Move(GetMovement());
+            actorController.Run(IsRunning(), isRunToggle);
 
             // ---- Jumping ----
-            if (IsJumping())
-                actorController.InformJump(true);
+            actorController.Jump(IsJumping());
 
             // ---- Firing ----
-            if (IsFiring())
-                actorController.FireProjectile();
+            actorController.Shoot(IsShooting());
         }
 
         // Is the player pressing the action key?
@@ -64,7 +63,7 @@ namespace Invasion
         }
 
         // Is the player firing?
-        bool IsFiring()
+        bool IsShooting()
         {
             if (isFireToggle && Input.GetKeyDown(fireKey))
                 return true;

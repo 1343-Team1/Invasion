@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5954093541201988521}
   - component: {fileID: 5954093541201988514}
   - component: {fileID: 5954093541201988515}
+  - component: {fileID: 1407416295287879143}
   - component: {fileID: 5954093541201988516}
   - component: {fileID: 5954093541201988517}
   - component: {fileID: 5954093541201988518}
@@ -148,8 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5632c61e6485a3649929b388fa62d8c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  input: {x: 0, y: 0}
-  isDead: 0
+  stats: {fileID: 0}
   runMultiplier: 0
   walkSpeed: 0
   jumpStrength: 0
@@ -170,6 +170,19 @@ MonoBehaviour:
   jumpForceMultiplier: 0
   jumpVelocityMaximum: 0
   jumpGravity: 0
+  velocity: {x: 0, y: 0}
+--- !u!114 &1407416295287879143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5954093541201988522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b9784c7c41fec4fb4a72201adc9901, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   hasMeleeAttack: 0
   meleeDamage: 0
   meleeAttackDelay: 0
@@ -187,7 +200,6 @@ MonoBehaviour:
   fireAngleDownCoords: {x: 0, y: 0}
   fireAngleDownXAngle: 0
   fireDelay: 0.5
-  velocity: {x: 0, y: 0}
 --- !u!114 &5954093541201988516
 MonoBehaviour:
   m_ObjectHideFlags: 0

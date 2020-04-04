@@ -64,7 +64,7 @@ namespace Invasion
                 return false;
 
             // Current target is dead.
-            if (currentTargetPoint.transform.parent.GetComponent<ActorController>().IsDead())
+            if (currentTargetPoint.transform.parent.GetComponent<ActorController>().IsDead)
                 return false;
 
             // Valid target already.
