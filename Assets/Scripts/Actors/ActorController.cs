@@ -21,6 +21,7 @@ namespace Invasion
         GameManager GM;                                         // a reference to the GameManager.
         Collider2D collider2d;                                  // a reference to the collider.
         Rigidbody2D rigidbody2d;                                // a reference to the rigidbody component.
+        SpriteRenderer spriteRenderer;                          // a reference to the spriterenderer.
         Animator animator;                                      // a reference to the animator.
         Damager damager;                                        // a reference to the damager (if present).
         Vector2 input = new Vector2();                          // regularly updated by the ActorInput component.
@@ -37,6 +38,8 @@ namespace Invasion
         bool facingRight = true;                                // used to coordinate projectile origin when still.
         public bool FacingRight { get { return facingRight; } } // used to allow facingRight to be seen publicly.
         bool meleeRebounding = false;                           // used to control jumpback after melee attacks.
+        bool playedExplosion = false;                           // whether the turret played it's explosion.
+        bool isUnlocked = false;                                // whether the swarmling has been unlocked.
 
         // ========== PUBLIC ==========
         [Header("Automated")]
@@ -74,6 +77,11 @@ namespace Invasion
         public float jumpVelocityMaximum;                       // stops the force-based jump from compounding too strongly.
         public float jumpGravity;                               // adjust the gravity effect for force jumping.
 
+        [Header("Turret Sprites")]
+        public GameObject explosionObject;                      // the explosion object to activate to play an explosion.
+        public Sprite activeTurret;                             // the regular turret sprite.
+        public Sprite destroyedTurret;                          // the destroyed turret sprite.
+
         // Exposed private/protected variables.
         [Header("Debug Data")]
         [SerializeField][DisplayWithoutEdit()] Vector2 velocity = new Vector2();    // display the velocity.
@@ -89,6 +97,7 @@ namespace Invasion
             GM = FindObjectOfType<GameManager>();
             collider2d = GetComponent<Collider2D>();
             rigidbody2d = GetComponent<Rigidbody2D>();
+            spriteRenderer = GetComponent<SpriteRenderer>();
             animator = GetComponent<Animator>();
             stats = GetComponent<Stats>();
             damager = GetComponent<Damager>();
@@ -107,7 +116,29 @@ namespace Invasion
                 animator.SetBool("Dead", isDead);               // inform the animator whether the actor is alive or dead.
 
             if (isDead)
+            {
+                // Swarmlings need to fall.
+                if (isUnlocked)
+                    return;
+
+                if (isWallCrawler)
+                {
+                    UnlockSwarmling();
+                    return;
+                }
+
+                // Turrets don't have animators.
+                if (playedExplosion || animator)
+                    return;
+
+                spriteRenderer.sprite = destroyedTurret;
+                explosionObject.SetActive(true);
+                playedExplosion = true;
                 return;                                         // don't worry about the rest of Update if the actor is dead.
+            }
+
+            if (!isDead && !animator && spriteRenderer.sprite != activeTurret)
+                spriteRenderer.sprite = activeTurret;
 
             if (isStationary)                                   // turrets just flip to face the target.
             {
@@ -265,6 +296,14 @@ namespace Invasion
                 rigidbody2d.gravityScale = editorGravity;
         }
 
+        // Set the gravity for this rigidbody to the amount specified.
+        void UnlockSwarmling()
+        {
+            rigidbody2d.gravityScale = 1f;
+            rigidbody2d.constraints = RigidbodyConstraints2D.None;
+            isUnlocked = true;
+        }
+
         // Jump by setting the velocity of the rigidbody2d directly from stats.jumpStrength if present, or jumpStrength.
         void JumpByVelocity()
         {
@@ -296,8 +335,8 @@ namespace Invasion
                 return;
 
             // Only stop when hitting a non-actor.
-            if (collision.gameObject.layer != LayerMask.GetMask("Actors"))
-                Deactivate();
+            if (collision.gameObject.layer == 12)
+                DeactivateRigidBody2D();
         }
 
         // ========== INPUT ==========
@@ -430,7 +469,7 @@ namespace Invasion
             isDead = true;
         }
 
-        void Deactivate()
+        void DeactivateRigidBody2D()
         {
             collider2d.isTrigger = true;
             rigidbody2d.constraints = RigidbodyConstraints2D.FreezeAll;

@@ -20,6 +20,10 @@ namespace Invasion
         float currentRegen = 0f;
 
         // ========== PUBLIC ==========
+        [Header("Shield References")]
+        public Animator shieldAnimator;
+        public GameObject shieldObject;
+
         [Header("Shield Settings")]
         public int maxShield;
         public float regenRate;
@@ -40,6 +44,11 @@ namespace Invasion
         void Update()
         {
             Regenerate();
+            if (currentShield <= 0 && shieldObject.activeInHierarchy == true)
+                shieldObject.SetActive(false);
+
+            else if (currentShield > 0 && shieldObject.activeInHierarchy == false)
+                shieldObject.SetActive(true);
         }
 
         void Regenerate()
@@ -47,7 +56,7 @@ namespace Invasion
             if (currentShield >= maxShield)                 // shield is already maxxed.
                 return;
 
-            currentRegen += regenRate;                      // regenerate.
+            currentRegen += regenRate * Time.deltaTime;     // regenerate.
 
             if (currentRegen < 1)                           // not enough to notice yet.
                 return;
