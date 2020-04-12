@@ -271,6 +271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5632c61e6485a3649929b388fa62d8c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  brain: {fileID: 0}
   stats: {fileID: 0}
   runMultiplier: 2
   walkSpeed: 0.7
@@ -279,6 +280,7 @@ MonoBehaviour:
   targetingPoint: {fileID: 5954429291475114522}
   isStationary: 0
   hasWalkAnimation: 0
+  stopsToShoot: 1
   isWallCrawler: 0
   rotateTowardMovement: 0
   moveByForce: 0
@@ -348,6 +350,7 @@ MonoBehaviour:
   jumpStrength: 0
   extraJumps: 0
   sightRange: 8
+  sightDegrees: 180
 --- !u!114 &6638377722471373865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -376,8 +379,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ee96803fcc3df44885afac19dcec7d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actorManager: {fileID: 0}
   navPointProximityLimit: 0.2
   currentTargetPoint: {fileID: 0}
   isSwarmlingAlive: 0
   followsNavPoints: 0
   isSwarmling: 0
+  startingNavPoint: {fileID: 0}

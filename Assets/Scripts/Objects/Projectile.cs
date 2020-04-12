@@ -20,7 +20,7 @@ namespace Invasion
         Collider2D collider2d;                              // the collider.
         float timeToDestroy;                                // the timer, predictive to avoid calculating every frame.
         bool hitAnimationTriggered = false;                 // used to determine whether to play the hit animation or destroy the gameObject.
-        Faction faction;                                    // the faction that fired this projectile.
+        Faction faction;                             // the faction that fired this projectile.
 
         // Public variables.
         [Header("Movement Settings")]
@@ -63,7 +63,6 @@ namespace Invasion
         // Called when a collider contacts another collider.
         void OnCollisionEnter2D(Collision2D collision)
         {
-
             ActorController actorController = collision.gameObject.GetComponent<ActorController>();
 
             // Collision is not an actor.

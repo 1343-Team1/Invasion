@@ -197,6 +197,12 @@ namespace Invasion
             gameObject.transform.SetParent(swarmlingParentObject.transform);
             swarmlingPool.Add(gameObject.GetComponent<AIBrain>());
         }
+
+        // Remove a dead actor from the list of actors.
+        public void RegisterDeath(ActorController actorController)
+        {
+             actors.Remove(actorController);
+        }
     }
 
     /// <summary>

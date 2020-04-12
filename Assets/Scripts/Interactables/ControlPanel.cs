@@ -19,21 +19,34 @@ namespace Invasion
         // ========== PRIVATE ==========
         bool isPlayerPresent = false;                   // used to determine if the player is in the activatable zone.
         PlayerInput playerInput;                        // REPLACE THIS WITH YOUR CHARACTER CONTROLLER!
-
-        // ========== PUBLIC ==========
-        [Header("Objects To Signal")]
-        public List<SignalReceiver> signalReceivers;    // populated in the editor!
+        GameObject widget;                              // the key widget.
 
 
         /********************
          * =- Functions -=
          ********************/
 
-        // Allow the player to trigger the SignalSender.
-        void Update()
+        // Initialize the widget.
+        protected override void Start()
         {
+            base.Start();
+
+            widget = transform.GetChild(0).gameObject;
+        }
+
+        // Allow the player to trigger the SignalSender.
+        protected override void Update()
+        {
+            base.Update();                              // the parent class' Update method.
+
+            if (!isReady || !isPlayerPresent)           // hide the widget.
+                widget.SetActive(false);
+
             if (!isPlayerPresent)                       // the player isn't present, don't worry about it.
                 return;
+
+            if (isReady)                                // reveal the UI Widget.
+                widget.SetActive(true);
 
             if (playerInput && playerInput.IsPressingActionKey()) // MAKE SURE ARE REFERENCING YOUR CHARACTER CONTROLLER AND YOU HAVE THIS METHOD ON IT!
                 Activate();
@@ -57,8 +70,6 @@ namespace Invasion
             isPlayerPresent = true;                     // note that the player just entered.
             if (!playerInput)                           // only store the player once.
                 playerInput = collision.GetComponent<PlayerInput>(); // AGAIN, YOUR CHARACTER CONTROLLER!
-
-            // Reveal the UI widget.
         }
 
         // Track when the player leave the trigger.
@@ -69,8 +80,6 @@ namespace Invasion
                 return;
 
             isPlayerPresent = false;
-
-            // Hide the UI widget.
         }
     }
 }

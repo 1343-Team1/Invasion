@@ -22,6 +22,7 @@ namespace Invasion
         Collider2D collider2d;                                  // a reference to the collider.
         Rigidbody2D rigidbody2d;                                // a reference to the rigidbody component.
         SpriteRenderer spriteRenderer;                          // a reference to the spriterenderer.
+        public AIBrain brain;                                          // a reference to the AIBrain.
         Animator animator;                                      // a reference to the animator.
         Damager damager;                                        // a reference to the damager (if present).
         Vector2 input = new Vector2();                          // regularly updated by the ActorInput component.
@@ -41,6 +42,8 @@ namespace Invasion
         bool playedExplosion = false;                           // whether the turret played it's explosion.
         bool isUnlocked = false;                                // whether the swarmling has been unlocked.
         bool isShooting = false;                                // whether the actor is shooting.
+        bool isMovingRaw = false;                               // whetehr the actor is receiving move input from an external source.
+        bool isJumping = false;                                 // whether the actor is jumping.
 
         // ========== PUBLIC ==========
         [Header("Automated")]
@@ -103,6 +106,7 @@ namespace Invasion
             animator = GetComponent<Animator>();
             stats = GetComponent<Stats>();
             damager = GetComponent<Damager>();
+            brain = GetComponent<AIBrain>();
             editorGravity = rigidbody2d.gravityScale;
 
             if (animator)
@@ -153,6 +157,8 @@ namespace Invasion
             // ---- Movement ----
             if (rotateTowardMovement)
                 RotateByInput();                         // rotate in direction of movement.
+            else if (isMovingRaw)
+                FlipByInput();
             else
                 FlipByVelocity();                      // flip in direction of movement.
             UpdateAnimator();
@@ -171,7 +177,7 @@ namespace Invasion
                 transform.localScale = new Vector3(1, 1, 1);
                 facingRight = true;
             }
-            else {
+            else if (input.x < 0) {
                 transform.localScale = new Vector3(-1, 1, 1);
                 facingRight = false;
             }
@@ -219,12 +225,21 @@ namespace Invasion
         // Update the animator with the current rigidbody data of the actor.
         void UpdateAnimator()
         {
-            animator.SetFloat("Horizontal Velocity", Mathf.Abs(rigidbody2d.velocity.x));
+            // If receiving external input to move, do not animate.
+            if (isMovingRaw && input == Vector2.zero)
+            {
+                animator.SetFloat("Horizontal Velocity", 0);
+                animator.SetBool("Walking", false);
+            }
+            else
+            {
+                animator.SetFloat("Horizontal Velocity", Mathf.Abs(rigidbody2d.velocity.x));
+                if (Mathf.Abs(rigidbody2d.velocity.x) > 0)
+                    animator.SetBool("Walking", true);
+            }
             animator.SetFloat("Vertical Velocity", rigidbody2d.velocity.y);
             animator.SetFloat("Vertical Input", input.y);
             animator.SetBool("Running", isRunning);
-            if (Mathf.Abs(rigidbody2d.velocity.x) > 0)
-                animator.SetBool("Walking", true);
         }
 
         // Let the animator know the actor is falling.
@@ -234,6 +249,7 @@ namespace Invasion
             {
                 animator.SetBool("Falling", false); // let the animator know the actor isn't falling.
                 isFalling = false;                  // record that the actor is no longer falling.
+                isJumping = false;
 
                 if (rigidbody2d.velocity.y == 0)    // grounded!
                     numberOfJumps = 0;              // reset the jumps.
@@ -312,6 +328,75 @@ namespace Invasion
             isUnlocked = true;
         }
 
+        // Move by setting the velocity of the rigidbody2d directly from stats.speed if present, or maximumVelocity.
+        void MoveByVelocity()
+        {
+            float trueWalkSpeed = (stats) ? stats.walkSpeed : walkSpeed;
+            Vector2 moveBy = input * trueWalkSpeed;
+
+            if (!hasWalkAnimation || isRunning)     // always running or run key active.
+                moveBy.x *= runMultiplier;
+
+            if (!isWallCrawler && isFalling)
+                moveBy.x *= fallingControlMultiplier;
+            
+            if (brain && (moveBy.x != 0 || moveBy.y != 0))
+            {
+                float multiplier = (Mathf.Abs(moveBy.x) > Mathf.Abs(moveBy.y)) ? 
+                    ((moveBy.x < 0) ? -trueWalkSpeed / moveBy.x : trueWalkSpeed / moveBy.x) : 
+                    ((moveBy.y < 0) ? -trueWalkSpeed / moveBy.y : trueWalkSpeed / moveBy.y);
+
+                moveBy = new Vector2(moveBy.x * multiplier, moveBy.y * multiplier);
+            }
+
+            // Only move the actor if they an AI or are getting input from the player.
+            Vector2 adjustedMove = new Vector2(moveBy.x, ((isWallCrawler) ? moveBy.y : rigidbody2d.velocity.y));
+            if (brain || (isMovingRaw && adjustedMove != Vector2.zero))
+                rigidbody2d.velocity = adjustedMove;
+        }
+
+        // Move by adding accelerationRate in force to the rigidbody, limited to maximumVelocity.
+        void MoveByForce()
+        {
+            if (!hasWalkAnimation || isRunning)     // always running or run key active.
+                input *= runMultiplier;
+
+            if (!isWallCrawler && isFalling)
+                input *= fallingControlMultiplier;
+
+            rigidbody2d.AddForce(input);
+            LimitRunVelocity();
+        }
+
+        // Limit maximum velocity of the rigidbody to the Stats.speed if present, or the maximumVelocity.
+        void LimitRunVelocity()
+        {
+            float maxVelocity = ((stats) ? stats.walkSpeed : walkSpeed);
+
+            if (!hasWalkAnimation || isRunning)     // always running or run key active.
+                maxVelocity *= runMultiplier;
+
+            if (Mathf.Abs(rigidbody2d.velocity.x) > maxVelocity)
+                rigidbody2d.velocity = new Vector2(
+                    ((rigidbody2d.velocity.x > 0) ? maxVelocity : -maxVelocity),
+                    rigidbody2d.velocity.y);
+
+            // Record for debugging.
+            velocity = rigidbody2d.velocity;
+        }
+
+        // If there is no input, slow down immediately.
+        bool ShouldDecelerate()
+        {
+            return !accelerating && Mathf.Abs(rigidbody2d.velocity.x) > 0 && Mathf.Abs(rigidbody2d.velocity.x) < decelerateAt.x;
+        }
+
+        // Decelerate at an increased rate.
+        void Decelerate()
+        {
+            rigidbody2d.AddForce(-rigidbody2d.velocity * decelerationMultiplier);
+        }
+        
         // Jump by setting the velocity of the rigidbody2d directly from stats.jumpStrength if present, or jumpStrength.
         void JumpByVelocity()
         {
@@ -320,6 +405,8 @@ namespace Invasion
 
             if (jetPackParticleBurster && !jetPackOnlyOnForceJump)
                 isJumpBursting = true;              // turn on the jetpack particles.
+
+            isJumping = true;
         }
 
         // Jump by adding force to the sprite's collider.
@@ -334,6 +421,7 @@ namespace Invasion
                 isJumpBursting = true;              // turn on the jetpack particles.
 
             velocity = rigidbody2d.velocity;
+            isJumping = true;
         }
 
         // Hit the ground after falling when dead.
@@ -360,6 +448,19 @@ namespace Invasion
             accelerating = (newX != 0) || (newX > oldX);
             this.input = input;
         }
+
+        // Take axis input from a platform or other external source.
+        public void MoveRaw(Vector2 input)
+        {
+            isMovingRaw = true;
+            rigidbody2d.velocity = new Vector2(input.x, input.y);
+        }
+
+        // Register that the external source is no longer sending input.
+        public void StopMovingRaw() { isMovingRaw = false; }
+
+        // Is the actor jumping?
+        public bool IsJumping() { return isJumping; }
 
         // Take run input from an ActorInput component.
         public void Run(bool isRunning, bool isToggle = false)
@@ -420,77 +521,30 @@ namespace Invasion
 
         }
 
-        // Move by setting the velocity of the rigidbody2d directly from stats.speed if present, or maximumVelocity.
-        void MoveByVelocity()
-        {
-            Vector2 moveBy = input * ((stats) ? stats.walkSpeed : walkSpeed);
-
-            if (!hasWalkAnimation || isRunning)     // always running or run key active.
-                moveBy.x *= runMultiplier;
-
-            if (!isWallCrawler && isFalling)
-                moveBy.x *= fallingControlMultiplier;
-
-            rigidbody2d.velocity = new Vector2(moveBy.x, ((isWallCrawler) ? moveBy.y : rigidbody2d.velocity.y));
-        }
-
-        // Move by adding accelerationRate in force to the rigidbody, limited to maximumVelocity.
-        void MoveByForce()
-        {
-            if (!hasWalkAnimation || isRunning)     // always running or run key active.
-                input *= runMultiplier;
-
-            if (!isWallCrawler && isFalling)
-                input *= fallingControlMultiplier;
-
-            rigidbody2d.AddForce(input);
-            LimitRunVelocity();
-        }
-
-        // Limit maximum velocity of the rigidbody to the Stats.speed if present, or the maximumVelocity.
-        void LimitRunVelocity()
-        {
-            float maxVelocity = ((stats) ? stats.walkSpeed : walkSpeed);
-
-            if (!hasWalkAnimation || isRunning)     // always running or run key active.
-                maxVelocity *= runMultiplier;
-
-            if (Mathf.Abs(rigidbody2d.velocity.x) > maxVelocity)
-                rigidbody2d.velocity = new Vector2(
-                    ((rigidbody2d.velocity.x > 0) ? maxVelocity : -maxVelocity),
-                    rigidbody2d.velocity.y);
-
-            // Record for debugging.
-            velocity = rigidbody2d.velocity;
-        }
-
-        // If there is no input, slow down immediately.
-        bool ShouldDecelerate()
-        {
-            return !accelerating && Mathf.Abs(rigidbody2d.velocity.x) > 0 && Mathf.Abs(rigidbody2d.velocity.x) < decelerateAt.x;
-        }
-
-        // Decelerate at an increased rate.
-        void Decelerate()
-        {
-            rigidbody2d.AddForce(-rigidbody2d.velocity * decelerationMultiplier);
-        }
 
         // ========== DEATH ==========
         // Inform the ActorController that it is dead.
         public void Kill() {
             isDead = true;
             rigidbody2d.AddForce(new Vector2(0, 200)); // bounce to all collision with floor.
-            AIBrain brain = GetComponent<AIBrain>();
-            if (brain.isSwarmling)
-            {
+
+            // Let the Swarmling brain know.
+            if (brain && brain.isSwarmling)
                 brain.IsAlive = false;
-                
-            }
+
+            // Turn the turret rigidbody and collider off.
+            if (rigidbody2d.constraints == RigidbodyConstraints2D.FreezeAll)
+                DeactivateRigidBody2D();
         }
 
         void DeactivateRigidBody2D()
         {
+            if (brain && !brain.isSwarmling)
+            {
+                brain.actorManager.RegisterDeath(this);
+                brain.Die();
+            }
+
             collider2d.isTrigger = true;
             rigidbody2d.constraints = RigidbodyConstraints2D.FreezeAll;
         }

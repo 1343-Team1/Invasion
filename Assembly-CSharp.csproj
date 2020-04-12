@@ -77,6 +77,7 @@
     <Compile Include="Assets\Scripts\Interactables\ControlPanel.cs" />
     <Compile Include="Assets\Scripts\Interactables\Door.cs" />
     <Compile Include="Assets\Scripts\Interactables\IntensityTrigger.cs" />
+    <Compile Include="Assets\Scripts\Interactables\NavPointFollower.cs" />
     <Compile Include="Assets\Scripts\Interactables\SignalReceiver.cs" />
     <Compile Include="Assets\Scripts\Interactables\SignalSender.cs" />
     <Compile Include="Assets\Scripts\Managers\ActorManager.cs" />
@@ -92,40 +93,41 @@
     <Compile Include="Assets\Scripts\Tools\DisplayWithoutEditDrawer.cs" />
     <Compile Include="Assets\Scripts\Tools\EditorButtonAttribute.cs" />
     <Compile Include="Assets\Scripts\Tools\TestScriptButton.cs" />
+    <Compile Include="Assets\Scripts\UI\Bounce.cs" />
     <None Include="Assets\Art\Actors\Aliens\Swarmling\attributions.txt" />
     <None Include="Assets\Utilities\Shaders\Translucent.shader" />
     <Reference Include="Unity.Timeline.Editor">
-      <HintPath>M:/Invasion/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+      <HintPath>D:/Invasion/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
-      <HintPath>M:/Invasion/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+      <HintPath>D:/Invasion/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>M:/Invasion/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>D:/Invasion/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>M:/Invasion/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+      <HintPath>D:/Invasion/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
-      <HintPath>M:/Invasion/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+      <HintPath>D:/Invasion/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>M:/Invasion/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>D:/Invasion/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
-      <HintPath>M:/Invasion/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+      <HintPath>D:/Invasion/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Sprite.Editor">
-      <HintPath>M:/Invasion/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
+      <HintPath>D:/Invasion/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Tilemap.Editor">
-      <HintPath>M:/Invasion/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
+      <HintPath>D:/Invasion/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>M:/Invasion/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>D:/Invasion/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-      <HintPath>M:/Invasion/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+      <HintPath>D:/Invasion/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

@@ -159,6 +159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5632c61e6485a3649929b388fa62d8c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  brain: {fileID: 0}
   stats: {fileID: 0}
   runMultiplier: 0
   walkSpeed: 0
@@ -167,6 +168,7 @@ MonoBehaviour:
   targetingPoint: {fileID: 8597442379455241262}
   isStationary: 0
   hasWalkAnimation: 1
+  stopsToShoot: 1
   isWallCrawler: 1
   rotateTowardMovement: 1
   moveByForce: 0
@@ -180,6 +182,9 @@ MonoBehaviour:
   jumpForceMultiplier: 0
   jumpVelocityMaximum: 0
   jumpGravity: 0
+  explosionObject: {fileID: 0}
+  activeTurret: {fileID: 0}
+  destroyedTurret: {fileID: 0}
   velocity: {x: 0, y: 0}
 --- !u!114 &8787423006581434442
 MonoBehaviour:
@@ -239,11 +244,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ee96803fcc3df44885afac19dcec7d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actorManager: {fileID: 0}
   navPointProximityLimit: 0.4
   currentTargetPoint: {fileID: 0}
   isSwarmlingAlive: 1
   followsNavPoints: 1
   isSwarmling: 1
+  startingNavPoint: {fileID: 0}
 --- !u!114 &8597442377834955977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,6 +272,7 @@ MonoBehaviour:
   jumpStrength: 0
   extraJumps: 0
   sightRange: 10
+  sightDegrees: 360
 --- !u!1 &8597442379455241262
 GameObject:
   m_ObjectHideFlags: 0

@@ -79,6 +79,10 @@ namespace Invasion
         // ========== MELEE ATTACK ==========
         void OnCollisionEnter2D(Collision2D collision)
         {
+            // If dead, don't worry about it.
+            if (actorController.IsDead)
+                return;
+
             // If no melee attack, don't worry about it.
             if (!hasMeleeAttack)
                 return;

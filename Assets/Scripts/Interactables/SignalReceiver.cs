@@ -17,6 +17,7 @@ namespace Invasion
 
         // ========== PRIVATE ==========
         protected bool receivedSignal = false;          // used to track whether the SignalReceiver is busy.
+        protected bool canReceiveSignal = true;         // used to track whetehr the SignalReceiver is ready for a signal.
 
         // ========== PUBLIC ==========
         [Header("Trigger Settings")]
@@ -32,6 +33,9 @@ namespace Invasion
         {
             return false;
         }
+
+        // Whether this signal receiver is ready for a signal.
+        public bool ReadyForSignal() { return !receivedSignal; }
 
         // Destroy or reinitialize the SignalReceiver.
         protected virtual void ClearSignal()

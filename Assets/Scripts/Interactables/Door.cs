@@ -101,9 +101,8 @@ namespace Invasion
                 isOpen = false;                     // note that the door is closed now.
                 collider2d.enabled = true;          // reenable the collider to block movement.
                 isAutomaticSignal = false;          // clear the automatic signal flag.
+                ClearSignal();                      // allow for another signal.
             }
-
-            ClearSignal();                          // allow for another signal.
         }
 
         // Attempts to receive a sent signal.

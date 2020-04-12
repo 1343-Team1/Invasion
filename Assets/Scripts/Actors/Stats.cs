@@ -73,7 +73,8 @@ namespace Invasion
                 if (shield)
                     Destroy(shield);
 
-                GetComponent<AIBrain>().IsAlive = false;
+                if (actorController.brain)
+                    actorController.brain.IsAlive = false;
                 actorController.Kill();
                 return;
             }

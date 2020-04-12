@@ -18,7 +18,8 @@ namespace Invasion
          ********************/
 
         // ========== PRIVATE / PROTECTED ==========
-        ActorManager actorManager;
+        public ActorManager actorManager;
+        ActorController actorController;
         Stats stats;
         NavPoint navPoint;
         [SerializeField] float navPointProximityLimit = 0.2f;
@@ -44,6 +45,7 @@ namespace Invasion
         void Start()
         {
             actorManager = FindObjectOfType<ActorManager>();
+            actorController = GetComponent<ActorController>();
             stats = GetComponent<Stats>();
             Initialize();
         }
@@ -70,7 +72,8 @@ namespace Invasion
                 return false;
 
             // Current target is dead.
-            if (currentTargetPoint.transform.parent.GetComponent<ActorController>().IsDead)
+            if (currentTargetPoint.transform.parent.GetComponent<ActorController>().IsDead ||
+                !currentTargetPoint.transform.parent.gameObject.activeInHierarchy)
             {
                 currentTargetPoint = null;
                 return false;
@@ -110,7 +113,15 @@ namespace Invasion
         {
             // Only swarmlings go into a pool.
             if (!isSwarmling)
-                Destroy(gameObject);
+            {
+                actorManager.RegisterDeath(actorController);
+
+                // Don't destroy turrets.
+                if (actorController.walkSpeed > 0)
+                    Destroy(gameObject);
+
+                return; // early out.
+            }
 
             isSwarmlingAlive = false;                            // Inform the pool.
             actorManager.actualSwarmlingCount--;
@@ -143,7 +154,7 @@ namespace Invasion
             }
 
             if (navPoint)
-                return navPoint.transform.position - transform.position;
+                return navPoint.transform.position - (Vector3)stats.Position;
 
             return Vector2.zero;
         }
