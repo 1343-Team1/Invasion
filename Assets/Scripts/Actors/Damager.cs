@@ -26,6 +26,7 @@ namespace Invasion
         // ========== PUBLIC ==========
         [Header("Melee Attack Settings")]
         public bool hasMeleeAttack = false;                     // if the actor has a melee attack.
+        public AudioClip meleeAudio;                            // the audio clip for a melee attack.
         public int meleeDamage;                                 // the amount of damage this actor deals on contact.
         public float meleeReboundDuration;                      // how long the actor bounces backward.
         public float meleeReboundDistance;                      // how far back the rebound pushes them.
@@ -104,6 +105,7 @@ namespace Invasion
                 return;
 
             // Collision is with an enemy actor and this actor has a melee attack, deal damage!
+            AudioManager.PlaySFX(meleeAudio);
             otherActorStats.TakeDamage(meleeDamage);
             timeCanMeleeAgain = Time.time + meleeAttackDelay;
 

@@ -21,6 +21,10 @@ namespace Invasion
         PlayerInput playerInput;                        // REPLACE THIS WITH YOUR CHARACTER CONTROLLER!
         GameObject widget;                              // the key widget.
 
+        // ========== PUBLIC ==========
+        [Header("Audio Settings")]
+        public AudioClip activationClip;
+
 
         /********************
          * =- Functions -=
@@ -55,9 +59,13 @@ namespace Invasion
         // Send a signal to every SignalReceiver in the list.
         void Activate()
         {
+            bool signalSent = false;
             int count = signalReceivers.Count;
             for (int i = 0; i < count; i++)
-                SendSignal(signalReceivers[i]);
+                signalSent = (SendSignal(signalReceivers[i]) || signalSent) ? true : false;
+
+            if (signalSent)
+                AudioManager.PlaySFX(activationClip);
         }
 
         // Track when the player enters the trigger.

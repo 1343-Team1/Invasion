@@ -48,14 +48,17 @@ namespace Invasion
         }
 
         // Send a signal to a SignalReceiver.
-        protected virtual void SendSignal(SignalReceiver destination)
+        protected virtual bool SendSignal(SignalReceiver destination)
         {
             // Send a signal and report with TRUE if it succeeds.
             if (destination.TryReceiveSignal(this))
             {
                 isReady = false;
                 animator.SetBool("Activated", true);
+                return true;
             }
+
+            return false;
         }
 
         void Reset()

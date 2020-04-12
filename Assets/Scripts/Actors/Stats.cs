@@ -76,6 +76,7 @@ namespace Invasion
                 if (actorController.brain)
                     actorController.brain.IsAlive = false;
                 actorController.Kill();
+                actorController.brain.Die();
                 return;
             }
         }

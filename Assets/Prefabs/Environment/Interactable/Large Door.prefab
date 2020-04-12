@@ -165,8 +165,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canBeTriggeredMultipleTimes: 1
-  openAnimationDuration: 0
-  closeAnimationDuration: 0
+  openAnimationDuration: 0.417
+  closeAnimationDuration: 0.417
+  doorOpen: {fileID: 8300000, guid: 2a93ee9f6e34d7f4ab391717070aa597, type: 3}
+  doorClose: {fileID: 8300000, guid: bbb88f5e3da353d4e910607278fa11aa, type: 3}
   signalCanClose: 0
   automaticallyCloses: 1
   delayToClose: 3

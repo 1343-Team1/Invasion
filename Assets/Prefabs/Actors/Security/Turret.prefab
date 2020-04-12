@@ -223,6 +223,7 @@ MonoBehaviour:
   jumpForceMultiplier: 0
   jumpVelocityMaximum: 0
   jumpGravity: 0
+  explosionClip: {fileID: 8300000, guid: 79d8d90d2da4fa64b906e5043b5ab703, type: 3}
   explosionObject: {fileID: 0}
   activeTurret: {fileID: 0}
   destroyedTurret: {fileID: 0}
@@ -240,12 +241,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasMeleeAttack: 0
+  meleeAudio: {fileID: 0}
   meleeDamage: 0
   meleeReboundDuration: 0
   meleeReboundDistance: 0
   meleeAttackDelay: 0
   hasRangedAttack: 1
-  fireAudio: {fileID: 8300000, guid: 9b82f1bc690d36b4585df9b47c8631ba, type: 3}
+  fireAudio: {fileID: 8300000, guid: f716ddf799de45f4b8577ef35b4e8aa0, type: 3}
   canFireWhileInAir: 0
   projectilePrefab: {fileID: 257033602567645443, guid: 2c0c2c0a23f26994dbd377fb48ec602b,
     type: 3}
@@ -257,7 +259,7 @@ MonoBehaviour:
   fireAngleCenterXAngle: 0
   fireAngleDownCoords: {x: 0, y: 0}
   fireAngleDownXAngle: 0
-  fireDelay: 0.5
+  fireDelay: 1
 --- !u!114 &5954093541201988516
 MonoBehaviour:
   m_ObjectHideFlags: 0

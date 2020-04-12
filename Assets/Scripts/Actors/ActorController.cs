@@ -73,6 +73,7 @@ namespace Invasion
 
         [Header("General Jump Settings")]
         public ParticleBurster jetPackParticleBurster;          // a reference to the particle burster (if there is one).
+        public AudioClip jetPackClip;           
         public bool jetPackOnlyOnForceJump;                     // is the jetpack only used on the force jump?
         public float fallingControlMultiplier;                  // how much the player can influence the fall trajectory of the actor.
 
@@ -82,10 +83,14 @@ namespace Invasion
         public float jumpVelocityMaximum;                       // stops the force-based jump from compounding too strongly.
         public float jumpGravity;                               // adjust the gravity effect for force jumping.
 
-        [Header("Turret Sprites")]
+        [Header("Turret Settings")]
         public GameObject explosionObject;                      // the explosion object to activate to play an explosion.
         public Sprite activeTurret;                             // the regular turret sprite.
         public Sprite destroyedTurret;                          // the destroyed turret sprite.
+
+        [Header("Death Sounds")]
+        public AudioClip deathClip;                             // the sound of the non-turret dying.
+        public AudioClip explosionClip;                         // the sound of the turret exploding.
 
         // Exposed private/protected variables.
         [Header("Debug Data")]
@@ -139,6 +144,7 @@ namespace Invasion
 
                 spriteRenderer.sprite = destroyedTurret;
                 explosionObject.SetActive(true);
+                AudioManager.PlaySFX(explosionClip);
                 playedExplosion = true;
                 return;                                         // don't worry about the rest of Update if the actor is dead.
             }
@@ -404,7 +410,10 @@ namespace Invasion
             waitingToJump = false;
 
             if (jetPackParticleBurster && !jetPackOnlyOnForceJump)
+            {
+                AudioManager.PlaySFX(jetPackClip);
                 isJumpBursting = true;              // turn on the jetpack particles.
+            }
 
             isJumping = true;
         }
@@ -453,7 +462,7 @@ namespace Invasion
         public void MoveRaw(Vector2 input)
         {
             isMovingRaw = true;
-            Debug.Log("Input: " + Input);
+           
             if (Mathf.Abs(Input.x) > 0 || Mathf.Abs(Input.y) > 0)
                 return;
 
@@ -530,6 +539,7 @@ namespace Invasion
         // Inform the ActorController that it is dead.
         public void Kill() {
             isDead = true;
+            AudioManager.PlaySFX(deathClip);
             rigidbody2d.AddForce(new Vector2(0, 200)); // bounce to all collision with floor.
 
             // Let the Swarmling brain know.

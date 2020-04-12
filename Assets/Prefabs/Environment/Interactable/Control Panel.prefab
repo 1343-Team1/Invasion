@@ -239,3 +239,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   signalReceivers: []
+  activationClip: {fileID: 8300000, guid: ac82a5c6b4f14ed4e8b09227a4e553a7, type: 3}

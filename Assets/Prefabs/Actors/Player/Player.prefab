@@ -274,6 +274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5632c61e6485a3649929b388fa62d8c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  brain: {fileID: 0}
   stats: {fileID: 0}
   runMultiplier: 2
   walkSpeed: 0.7
@@ -282,6 +283,7 @@ MonoBehaviour:
   targetingPoint: {fileID: 3724116164146766407}
   isStationary: 0
   hasWalkAnimation: 0
+  stopsToShoot: 1
   isWallCrawler: 0
   rotateTowardMovement: 0
   moveByForce: 0
@@ -289,6 +291,7 @@ MonoBehaviour:
   decelerateAt: {x: 5, y: 0}
   decelerationMultiplier: {x: 5, y: 0}
   jetPackParticleBurster: {fileID: 3724116165393629970}
+  jetPackClip: {fileID: 8300000, guid: 9b0104792b4f17d4e972666931b3289b, type: 3}
   jetPackOnlyOnForceJump: 0
   fallingControlMultiplier: 0.5
   jumpByForce: 0
@@ -298,6 +301,8 @@ MonoBehaviour:
   explosionObject: {fileID: 0}
   activeTurret: {fileID: 0}
   destroyedTurret: {fileID: 0}
+  deathClip: {fileID: 8300000, guid: f8a2430891c397249a63cd0bcbe27344, type: 3}
+  explosionClip: {fileID: 0}
   velocity: {x: 0, y: 0}
 --- !u!114 &2621912258358682055
 MonoBehaviour:
@@ -312,6 +317,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasMeleeAttack: 0
+  meleeAudio: {fileID: 0}
   meleeDamage: 0
   meleeReboundDuration: 0
   meleeReboundDistance: 0
@@ -373,6 +379,7 @@ MonoBehaviour:
   jumpStrength: 5
   extraJumps: 5
   sightRange: 0
+  sightDegrees: 0
 --- !u!199 &3724116165393629972
 ParticleSystemRenderer:
   serializedVersion: 6

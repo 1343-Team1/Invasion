@@ -30,6 +30,10 @@ namespace Invasion
         public float openAnimationDuration;             // manually input the duration of the open animation in the editor.
         public float closeAnimationDuration;            // manually input the duration of the closing animation in the editor.
 
+        [Header("Sound Settings")]
+        public AudioClip doorOpen;
+        public AudioClip doorClose;
+
         [Header("Door Settings")]
         public bool signalCanClose = false;             // whether the signal can close the door, or just open it.
         public bool automaticallyCloses = true;         // whether the door automatically closes after a set duration.
@@ -72,11 +76,13 @@ namespace Invasion
         {
             if (!isOpen)                            // the door is closed and needs to open.
             {
+                AudioManager.PlaySFX(doorOpen);
                 animator.SetBool("Open", true);     // animate the door opening.
                 timeWhenAnimationComplete = Time.time + openAnimationDuration; // note the time to RegisterComplete().
             }
             else if (isAutomaticSignal || signalCanClose) // only an automatic signal or permission can close the door.
             {
+                AudioManager.PlaySFX(doorClose);
                 timeWhenAnimationComplete = Time.time + closeAnimationDuration; // note the time to RegisterComplete().
                 animator.SetBool("Open", false);    // animate the door closing.
             }
