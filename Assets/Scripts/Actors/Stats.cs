@@ -39,7 +39,9 @@ namespace Invasion
 
         [Header("Vision")]
         public float sightRange;                                // the distance this Actor can see.
+        public float sightDegrees;                              // the size of the pie that the actor can see.
 
+        public Vector2 Position { get { return actorController.targetingPoint.transform.position; } }
 
         /********************
          * =- Functions -=
@@ -68,7 +70,10 @@ namespace Invasion
             // Actor died, destroy the shield.
             if (currentHealth <= 0)
             {
-                Destroy(shield);
+                if (shield)
+                    Destroy(shield);
+
+                GetComponent<AIBrain>().IsAlive = false;
                 actorController.Kill();
                 return;
             }

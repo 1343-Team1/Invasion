@@ -37,6 +37,10 @@ namespace Invasion
         // Update is called once per frame
         void Update()
         {
+            // ---- Firing ----
+            if (brain.IsFiring(actorController.FacingRight))
+                actorController.Shoot(true);
+
             // ---- Movement ----
             actorController.Move(GetMovement());
             actorController.Run(brain.IsRunning());
@@ -44,15 +48,11 @@ namespace Invasion
             // ---- Jumping ----
             if (brain.IsJumping())
                 actorController.Jump(true);
-
-            // ---- Firing ----
-            if (brain.IsFiring())
-                actorController.Shoot(true);
         }
 
         Vector2 GetMovement()
         {
-            input = brain.GetMovement();
+            input = brain.GetMovement(actorController.FacingRight);
             adjustedInput = new Vector2(Mathf.Clamp(input.x, -speed, speed), Mathf.Clamp(input.y, -speed, speed));
 
             return adjustedInput;

@@ -38,11 +38,17 @@ namespace Invasion
          ********************/
 
         // See if these two Actors can see eachother.
-        public static bool IsTargetVisible(Vector2 attackerPosition, Vector2 targetPosition, float sightRange = 0)
+        public static bool IsTargetVisible(Vector2 attackerPosition, Vector2 targetPosition, bool attackerFacingRight = true, float sightDegrees = 360, float sightRange = 0)
         {
             float distance = Vector2.Distance(attackerPosition, targetPosition);
 
             if (sightRange > 0 && distance > sightRange)    // was a sight range specified and the distance is too great?
+                return false;
+
+            // Not in the proper direction to be seen.
+            Vector2 direction = targetPosition - attackerPosition;
+            Vector2 originDirection = (attackerFacingRight) ? Vector2.right : Vector2.left;
+            if (Vector2.Angle(direction, originDirection) > sightDegrees / 2)
                 return false;
 
             // Are any platforms obscuring the target? (the three level collision layers need to be considered).
@@ -125,7 +131,7 @@ namespace Invasion
         }
 
         // Return a valid target or null if none is available.
-        public ActorController GetValidTarget(Stats attackerStats)
+        public ActorController GetValidTarget(Stats attackerStats, bool attackerFacingRight = true)
         {
             Vector2 attackerPosition = attackerStats.transform.position;
 
@@ -133,7 +139,7 @@ namespace Invasion
             for (int i = 0; i < count; i++)
             {
                 // This actor is dead.
-                if (actors[i].IsDead)
+                if (actors[i].IsDead || !actors[i].gameObject.activeInHierarchy)
                     continue;
 
                 // This potential target is in the same faction.
@@ -145,7 +151,7 @@ namespace Invasion
                     continue;                               // go to the next iteration.
 
                 // The target is obstructed by platforms.
-                if (!IsTargetVisible(attackerStats.transform.position, actors[i].transform.position, attackerStats.sightRange))
+                if (!IsTargetVisible(attackerStats.Position, actors[i].targetingPoint.transform.position, attackerFacingRight, attackerStats.sightDegrees, attackerStats.sightRange))
                     continue;                               // go to the next iteration.
 
                 // The target is in range and visible!
@@ -180,6 +186,7 @@ namespace Invasion
                 swarmlingPool[i].transform.position = position;
                 swarmlingPool[i].Initialize();
                 swarmlingPool[i].gameObject.SetActive(true);
+                swarmlingPool[i].transform.GetChild(0).gameObject.SetActive(true);
 
                 // Success, exit this method.
                 return;

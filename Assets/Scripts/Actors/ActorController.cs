@@ -40,6 +40,7 @@ namespace Invasion
         bool meleeRebounding = false;                           // used to control jumpback after melee attacks.
         bool playedExplosion = false;                           // whether the turret played it's explosion.
         bool isUnlocked = false;                                // whether the swarmling has been unlocked.
+        bool isShooting = false;                                // whether the actor is shooting.
 
         // ========== PUBLIC ==========
         [Header("Automated")]
@@ -57,6 +58,7 @@ namespace Invasion
         [Header("General Movement Settings")]
         public bool isStationary = false;                       // whether this actor is stationary.
         public bool hasWalkAnimation = false;                   // whether this actor walks or just runs.
+        public bool stopsToShoot = true;                        // whether this actor stops to shoot or continues moving while shooting.
         public bool isWallCrawler = false;                      // whether this actor is restricted to grounded horizontal movement.
         public bool rotateTowardMovement = false;               // whether this actor will rotate to point in whichever direction it is moving.
 
@@ -268,6 +270,12 @@ namespace Invasion
                 return;
 
             // ---- Movement ----
+            if (stopsToShoot && isShooting)             // don't move if shooting and stops to shoot.
+            {
+                rigidbody2d.velocity = new Vector2(0, rigidbody2d.velocity.y);
+                return;
+            }
+
             if (!moveByForce)       // the default movement method sets the velocity directly.
                 MoveByVelocity();
             else                    // optional movement by adding force to the rigidbody2d.
@@ -335,8 +343,11 @@ namespace Invasion
                 return;
 
             // Only stop when hitting a non-actor.
-            if (collision.gameObject.layer == 12)
+            int layer = collision.gameObject.layer;
+            if (layer == 12 || layer == 11 || layer == 13)
+            {
                 DeactivateRigidBody2D();
+            } 
         }
 
         // ========== INPUT ==========
@@ -385,6 +396,7 @@ namespace Invasion
         {
             if (isShooting == false)
             {
+                this.isShooting = false;
                 if (animator)
                     animator.SetBool("Shooting", false);
                 return;
@@ -402,6 +414,7 @@ namespace Invasion
             if (!damager.FireProjectile())
                 return;
 
+            this.isShooting = true;
             if (animator)
                 animator.SetBool("Shooting", true);                 // make sure the shooting animation plays.
 
@@ -467,6 +480,13 @@ namespace Invasion
         // Inform the ActorController that it is dead.
         public void Kill() {
             isDead = true;
+            rigidbody2d.AddForce(new Vector2(0, 200)); // bounce to all collision with floor.
+            AIBrain brain = GetComponent<AIBrain>();
+            if (brain.isSwarmling)
+            {
+                brain.IsAlive = false;
+                
+            }
         }
 
         void DeactivateRigidBody2D()

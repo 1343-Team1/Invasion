@@ -23,6 +23,7 @@ namespace Invasion
         [SerializeField] GameObject player;
 
         // ========== PUBLIC ==========
+        public NavPoint nextNavPoint;
         public bool isSwarmlingNavPoint;
         public bool isGoodPath;
 
@@ -37,6 +38,10 @@ namespace Invasion
             // Get the GameManager and ActorManager.
             gameManager = FindObjectOfType<GameManager>();
             actorManager = FindObjectOfType<ActorManager>();
+
+            // Early out if it's not a swarmling NavPoint.
+            if (!isSwarmlingNavPoint)
+                return;
 
             // Prepare for the loop.
             nextVisiblePoints = new List<NavPoint>();
@@ -91,6 +96,10 @@ namespace Invasion
         // Is this navpoint in the right position to spawn?
         public bool IsGoodToSpawn()
         {
+            // Not a swarmling NavPoint, no spawning.
+            if (!isSwarmlingNavPoint)
+                return false;
+
             // Above the player.
             if (transform.position.y >= player.transform.position.y)
                 return false;
@@ -108,6 +117,28 @@ namespace Invasion
         // Draw a yellow circle to show nav points in the editor.
         void OnDrawGizmos()
         {
+            if (!isSwarmlingNavPoint)
+            {
+                Gizmos.color = Color.cyan;
+                Gizmos.DrawWireSphere(transform.position, 0.25f);
+
+                // There's no next NavPoint set.
+                if (player && !(Physics2D.Linecast(transform.position, player.GetComponent<ActorController>().targetingPoint.transform.position, ~(1 << 15))))
+                    Gizmos.DrawLine(transform.position, player.GetComponent<ActorController>().targetingPoint.transform.position);
+
+                // There's no next NavPoint set.
+                if (!nextNavPoint)
+                    return;
+
+                // Nothing is obscuring the next NavPoint.
+                if (!(Physics2D.Linecast(transform.position, nextNavPoint.transform.position, ~(1 << 15))))
+                    Gizmos.DrawLine(transform.position, nextNavPoint.transform.position);
+
+                return;
+            }
+
+
+
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(transform.position, 0.25f);
 

@@ -63,15 +63,23 @@ namespace Invasion
         // Called when a collider contacts another collider.
         void OnCollisionEnter2D(Collision2D collision)
         {
-            AnimateHit();
 
             ActorController actorController = collision.gameObject.GetComponent<ActorController>();
 
-            // Collision is not an actor, or is an actor of the same faction.
-            if (!actorController || actorController.GetComponent<Stats>().faction == faction)
+            // Collision is not an actor.
+            if (!actorController)
+            {
+                AnimateHit();
+                Destroy(gameObject);
+                return;
+            }
+
+            // Collision is an actor of the same faction.
+            if (actorController.GetComponent<Stats>().faction == faction)
                 return;
 
             // Collision is with an enemy actor and this actor has a melee attack, deal damage!
+            AnimateHit();
             actorController.GetComponent<Stats>().TakeDamage(damage);
         }
 

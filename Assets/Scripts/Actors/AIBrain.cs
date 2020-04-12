@@ -32,6 +32,10 @@ namespace Invasion
         public bool followsNavPoints = false;
         public bool isSwarmling = false;
 
+        [Header("Nav Point Settings")]
+        public NavPoint startingNavPoint;                       // the first NavPoint.
+
+
         /********************
          * =- Functions -=
          ********************/
@@ -54,10 +58,12 @@ namespace Invasion
                 // Get a navpoint if one is visible.
                 navPoint = GameManager.GetValidNavPoint(transform.position, navPointProximityLimit);
             }
+            else if (startingNavPoint)
+                navPoint = startingNavPoint;
         }
 
         // See if this AIBrain already has a target.
-        bool HasTarget()
+        bool HasTarget(bool attackerFacingRight = true)
         {
             // No target.
             if (!currentTargetPoint)
@@ -65,16 +71,26 @@ namespace Invasion
 
             // Current target is dead.
             if (currentTargetPoint.transform.parent.GetComponent<ActorController>().IsDead)
+            {
+                currentTargetPoint = null;
                 return false;
+            }
+
+            // Current target is not visible.
+            if (!ActorManager.IsTargetVisible(stats.Position, currentTargetPoint.transform.position, attackerFacingRight, stats.sightDegrees, stats.sightRange))
+            {
+                currentTargetPoint = null;
+                return false;
+            }
 
             // Valid target already.
             return true;
         }
 
         // If the target should be fired at and this AIBrain can fire, then return true.
-        public bool IsFiring()
+        public bool IsFiring(bool attackerFacingRight = false)
         {
-            if (HasTarget() && ActorManager.IsTargetVisible(transform.position, currentTargetPoint.transform.position, stats.sightRange))
+            if (HasTarget(attackerFacingRight) && ActorManager.IsTargetVisible(stats.Position, currentTargetPoint.transform.position, attackerFacingRight, stats.sightDegrees, stats.sightRange))
                 return true;
 
             return false;
@@ -98,18 +114,19 @@ namespace Invasion
 
             isSwarmlingAlive = false;                            // Inform the pool.
             actorManager.actualSwarmlingCount--;
+            gameObject.transform.GetChild(0).gameObject.SetActive(false);
             gameObject.SetActive(false);                // Turn it off.
         }
 
         // Determines how this AIBrain should move.
-        public Vector2 GetMovement()
+        public Vector2 GetMovement(bool attackerFacingRight = true)
         {
             // There is a valid target to pursue.
-            if (HasTarget() && ActorManager.IsTargetVisible(transform.position, currentTargetPoint.transform.position, stats.sightRange))
-                return currentTargetPoint.transform.position - transform.position;
+            if (HasTarget(attackerFacingRight) && ActorManager.IsTargetVisible(stats.Position, currentTargetPoint.transform.position, attackerFacingRight, stats.sightDegrees, stats.sightRange))
+                return currentTargetPoint.transform.position - (Vector3)(stats.Position);
 
             // Get a valid target to pursue from the ActorManager.
-            ActorController validTarget = actorManager.GetValidTarget(stats);
+            ActorController validTarget = actorManager.GetValidTarget(stats, attackerFacingRight);
             currentTargetPoint = ((validTarget) ? validTarget.targetingPoint : currentTargetPoint);
 
             // There is no valid target to pursue. If this doesn't follow NavPoints, it doesn't move?
@@ -117,8 +134,13 @@ namespace Invasion
                 return Vector2.zero;
 
             // If there is no navPoint target already, or it is too close, request a new one.
-            if (!navPoint || Vector2.Distance(transform.position, navPoint.transform.position) < navPointProximityLimit)
-                navPoint = GameManager.GetValidNavPoint(transform.position, navPointProximityLimit);
+            if (!navPoint || Vector2.Distance(stats.Position, navPoint.transform.position) < navPointProximityLimit)
+            {
+                if (isSwarmling)
+                    navPoint = GameManager.GetValidNavPoint(transform.position, navPointProximityLimit);
+                else if (navPoint.nextNavPoint)
+                    navPoint = navPoint.nextNavPoint;
+            }
 
             if (navPoint)
                 return navPoint.transform.position - transform.position;
@@ -129,8 +151,20 @@ namespace Invasion
         // Draw a yellow circle to show nav points in the editor.
         void OnDrawGizmos()
         {
-            if (!isSwarmling)                           // Only draw gizmos for Swarmlings.
+            if (!isSwarmling)                           // Draw NavPoint routes.
+            {
+                Gizmos.color = Color.cyan;
+
+                if (startingNavPoint)
+                {
+                    ActorController actorController = GetComponent<ActorController>();
+                    Vector3 Position = (actorController) ? actorController.targetingPoint.transform.position : transform.position;
+                    if (!(Physics2D.Linecast(Position, startingNavPoint.transform.position, ~(1 << 15))))
+                        Gizmos.DrawLine(Position, startingNavPoint.transform.position);
+                }
+
                 return;
+            }
 
             Gizmos.color = Color.yellow;
 
