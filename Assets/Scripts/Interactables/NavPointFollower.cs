@@ -68,6 +68,7 @@ namespace Invasion
             if (!actorController) // not an actor.
                 return;
 
+            actorController.StopMovingRaw();
             actorsOnPlatform.Remove(actorController);
         }
 

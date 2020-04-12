@@ -25,6 +25,7 @@ namespace Invasion
         // ========== PUBLIC ==========
         public NavPoint nextNavPoint;
         public bool isSwarmlingNavPoint;
+        public bool isPlatformNavPoint;
         public bool isGoodPath;
 
 
@@ -123,15 +124,11 @@ namespace Invasion
                 Gizmos.DrawWireSphere(transform.position, 0.25f);
 
                 // There's no next NavPoint set.
-                if (player && !(Physics2D.Linecast(transform.position, player.GetComponent<ActorController>().targetingPoint.transform.position, ~(1 << 15))))
-                    Gizmos.DrawLine(transform.position, player.GetComponent<ActorController>().targetingPoint.transform.position);
-
-                // There's no next NavPoint set.
                 if (!nextNavPoint)
                     return;
 
                 // Nothing is obscuring the next NavPoint.
-                if (!(Physics2D.Linecast(transform.position, nextNavPoint.transform.position, ~(1 << 15))))
+                if (!(Physics2D.Linecast(transform.position, nextNavPoint.transform.position, (isPlatformNavPoint) ? ~(1 << 12) : ~(1 << 15))))
                     Gizmos.DrawLine(transform.position, nextNavPoint.transform.position);
 
                 return;

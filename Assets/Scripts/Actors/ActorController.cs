@@ -351,7 +351,7 @@ namespace Invasion
 
             // Only move the actor if they an AI or are getting input from the player.
             Vector2 adjustedMove = new Vector2(moveBy.x, ((isWallCrawler) ? moveBy.y : rigidbody2d.velocity.y));
-            if (brain || (isMovingRaw && adjustedMove != Vector2.zero))
+            if (brain || !isMovingRaw || (isMovingRaw && adjustedMove != Vector2.zero))
                 rigidbody2d.velocity = adjustedMove;
         }
 
@@ -453,6 +453,10 @@ namespace Invasion
         public void MoveRaw(Vector2 input)
         {
             isMovingRaw = true;
+            Debug.Log("Input: " + Input);
+            if (Mathf.Abs(Input.x) > 0 || Mathf.Abs(Input.y) > 0)
+                return;
+
             rigidbody2d.velocity = new Vector2(input.x, input.y);
         }
 
