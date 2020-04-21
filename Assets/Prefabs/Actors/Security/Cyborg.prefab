@@ -288,6 +288,7 @@ MonoBehaviour:
   decelerateAt: {x: 5, y: 0}
   decelerationMultiplier: {x: 5, y: 0}
   jetPackParticleBurster: {fileID: 0}
+  jetPackClip: {fileID: 0}
   jetPackOnlyOnForceJump: 0
   fallingControlMultiplier: 0.5
   jumpByForce: 0
@@ -383,7 +384,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actorManager: {fileID: 0}
-  navPointProximityLimit: 0.2
+  navPointProximityLimit: 0.5
   currentTargetPoint: {fileID: 0}
   isSwarmlingAlive: 0
   followsNavPoints: 0
