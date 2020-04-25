@@ -551,6 +551,11 @@ namespace Invasion
                 DeactivateRigidBody2D();
         }
 
+        public void Resurrect()
+        {
+            isDead = false;
+        }
+
         void DeactivateRigidBody2D()
         {
             if (brain && !brain.isSwarmling)
@@ -566,7 +571,7 @@ namespace Invasion
         // ========== MISC ==========
         public void MeleeRebounding(bool meleeSuccessful)
         {
-            this.meleeRebounding = meleeSuccessful;
+            meleeRebounding = meleeSuccessful;
         }
     }
 }

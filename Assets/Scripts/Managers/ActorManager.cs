@@ -128,6 +128,16 @@ namespace Invasion
                     return;
                 }
             }
+
+            // Cull any that get too far ahead of the player.
+            for (int i = 0; i < actualSwarmlingCount; i++)
+            {
+                if (!swarmlingPool[i].IsAlive)
+                    continue;
+
+                if (swarmlingPool[i].transform.position.y > player.transform.position.y + minDistanceToSpawn)
+                    swarmlingPool[i].Die();
+            }
         }
 
         // Return a valid target or null if none is available.

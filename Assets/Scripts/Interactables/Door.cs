@@ -101,6 +101,7 @@ namespace Invasion
 
                 if (automaticallyCloses)            // prepare to automatically close door if needed.
                     timeToClose = Time.time + delayToClose;
+                ClearSignal();
             }
             else if (isAutomaticSignal || signalCanClose) // only an automatic signal or permission can close a door.
             {
