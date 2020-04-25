@@ -123,6 +123,10 @@ namespace Invasion
         // This is the loop for animation logic.
         void Update()
         {
+            // Not time to play yet.
+            if (GameManager.GetGameState() != GameManager.GameState.Playing)
+                return;
+
             if (animator)
                 animator.SetBool("Dead", isDead);               // inform the animator whether the actor is alive or dead.
 
@@ -284,6 +288,10 @@ namespace Invasion
         // This is the loop for physics.
         void FixedUpdate()
         {
+            // Not time to play yet.
+            if (GameManager.GetGameState() != GameManager.GameState.Playing)
+                return;
+
             // ---- Unique ----
             if (isDead)
                 return;                                 // don't worry about the rest of Update if the actor is dead.
@@ -551,6 +559,11 @@ namespace Invasion
                 DeactivateRigidBody2D();
         }
 
+        public void Resurrect()
+        {
+            isDead = false;
+        }
+
         void DeactivateRigidBody2D()
         {
             if (brain && !brain.isSwarmling)
@@ -566,7 +579,7 @@ namespace Invasion
         // ========== MISC ==========
         public void MeleeRebounding(bool meleeSuccessful)
         {
-            this.meleeRebounding = meleeSuccessful;
+            meleeRebounding = meleeSuccessful;
         }
     }
 }

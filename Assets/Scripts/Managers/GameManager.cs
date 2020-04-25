@@ -17,14 +17,28 @@ namespace Invasion
 
         // ========== STATIC ==========
         static GameManager gameManager;
+        static GameState gameState = GameState.TitleScreen;
+        static bool playerWon = false;
+
+        public enum GameState
+        {
+            TitleScreen,
+            Playing,
+            GameOver
+        };
 
         // ========== PUBLIC ==========
         // 0 to 1, controls the atmosphere of the game through screenshake, sound, and alien and debris spawn rate.        [Header("Atmosphere")]
+        [Header("Game State Management")]
+        public GameObject titleScreen;
+        public GameObject gameOverScreen;
+
         [Header("Atmosphere")]
         public float intensity;
 
         [Header("Actors")]
         public List<ActorController> activeActors;
+        public ActorController player;
 
         [Header("Nav Points")]
         public NavPoint[] navPoints;
@@ -66,12 +80,67 @@ namespace Invasion
 
             return lastResortNavPoint;
         }
+        // Returns the game state so that the inquirer knows how to act.
+        public static GameState GetGameState() { return gameState; }
 
         // Initialize and store all the NavPoints.
         void Start()
         {
             gameManager = this;
             navPoints = FindObjectsOfType<NavPoint>();
+        }
+
+        void Update()
+        {
+            // Allow the user to quit. (only works in build)
+            if (Input.GetKeyUp(KeyCode.Escape))
+                Application.Quit();
+
+            switch(gameState)
+            {
+                case GameState.TitleScreen:
+
+                    // Player started the game.
+                    if (Input.GetKeyUp(KeyCode.Return))
+                        StartGame();
+
+                    break;
+
+                case GameState.Playing:
+
+                    // Player won the game or died.
+                    if (playerWon || player.IsDead)
+                        EndGame();
+
+                    break;
+
+                case GameState.GameOver:
+
+                    // Player wants to play again.
+                    if (Input.GetKeyUp(KeyCode.Return))
+                        ResetGame();
+
+                    break;
+            }
+        }
+
+        void StartGame()
+        {
+            gameState = GameState.Playing;
+            titleScreen.SetActive(false);
+        }
+
+        void EndGame()
+        {
+            gameState = GameState.GameOver;
+            gameOverScreen.SetActive(true);
+        }
+
+        void ResetGame()
+        {
+            gameState = GameState.TitleScreen;
+            gameOverScreen.SetActive(false);
+            titleScreen.SetActive(true);
         }
     }
 }

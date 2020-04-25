@@ -95,6 +95,10 @@ namespace Invasion
         // Manage the desiredSwarmlingCount based on GameManager intensity.
         void Update()
         {
+            // Not time to play yet.
+            if (GameManager.GetGameState() != GameManager.GameState.Playing)
+                return;
+
             desiredSwarmlingCount = (int)(minimumSwarmlings + (swarmlingCountMultiplier * gameManager.intensity));
 
             // Not enough swarmlings.
@@ -127,6 +131,16 @@ namespace Invasion
                     swarmlingPool[i].Die();
                     return;
                 }
+            }
+
+            // Cull any that get too far ahead of the player.
+            for (int i = 0; i < actualSwarmlingCount; i++)
+            {
+                if (!swarmlingPool[i].IsAlive)
+                    continue;
+
+                if (swarmlingPool[i].transform.position.y > player.transform.position.y + minDistanceToSpawn)
+                    swarmlingPool[i].Die();
             }
         }
 

@@ -52,7 +52,7 @@ namespace Invasion
         {
             actorController = GetComponent<ActorController>();
             shield = GetComponent<Shield>();
-            currentHealth = maxHealth;
+            FillHealth();
         }
 
         public void TakeDamage(int damage)
@@ -76,9 +76,15 @@ namespace Invasion
                 if (actorController.brain)
                     actorController.brain.IsAlive = false;
                 actorController.Kill();
-                actorController.brain.Die();
+                if (actorController.brain)
+                    actorController.brain.Die();
                 return;
             }
+        }
+        
+        public void FillHealth()
+        {
+            currentHealth = maxHealth;
         }
     }
 }

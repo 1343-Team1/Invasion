@@ -37,6 +37,10 @@ namespace Invasion
         // Update is called once per frame
         void Update()
         {
+            // Not time to play yet.
+            if (GameManager.GetGameState() != GameManager.GameState.Playing)
+                return;
+
             // ---- Firing ----
             if (brain.IsFiring(actorController.FacingRight))
                 actorController.Shoot(true);
