@@ -44,6 +44,7 @@ namespace Invasion
         bool isShooting = false;                                // whether the actor is shooting.
         bool isMovingRaw = false;                               // whetehr the actor is receiving move input from an external source.
         bool isJumping = false;                                 // whether the actor is jumping.
+        bool isPlayer = false;                                  // used to trigger win state.
 
         // ========== PUBLIC ==========
         [Header("Automated")]
@@ -116,6 +117,8 @@ namespace Invasion
 
             if (animator)
                 animator.SetBool("Has Walk Animation", hasWalkAnimation);
+            if (GetComponent<PlayerInput>())
+                isPlayer = true;
         }
 
         // ========== MOVEMENT ANIMATION ==========
@@ -453,6 +456,17 @@ namespace Invasion
             {
                 DeactivateRigidBody2D();
             } 
+        }
+
+        // Win the game.
+        void OnTriggerEnter2D(Collider2D collision)
+        {
+            // Is dead, is not the player, or this trigger isn't the win trigger.
+            if (isDead || !isPlayer || !collision.gameObject.GetComponent<WinTrigger>())
+                return;
+
+            // Win the game!
+            GameManager.Win();
         }
 
         // ========== INPUT ==========

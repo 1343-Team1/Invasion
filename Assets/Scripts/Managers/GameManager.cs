@@ -49,7 +49,7 @@ namespace Invasion
          ********************/
 
         // Returns a navPoint within sight, preferably one that leads to the player.
-        public static NavPoint GetValidNavPoint(Vector2 inquirerPosition, float navPointProximityLimit)
+        public static NavPoint GetValidNavPoint(Vector2 inquirerPosition, float navPointProximityLimit, bool isSwarmling)
         {
             // Catch a request that comes before the static gameManager is initialized.
             if (!gameManager)
@@ -59,6 +59,10 @@ namespace Invasion
             int count = gameManager.navPoints.Length;
             for (int i = 0; i < count; i++)
             {
+                // Only follow Swarmling nav points.
+                if (isSwarmling && !gameManager.navPoints[i].isSwarmlingNavPoint)
+                    continue;
+
                 // This navpoint is below the swarmling.
                 if (inquirerPosition.y >= gameManager.navPoints[i].transform.position.y)
                     continue;
@@ -82,12 +86,15 @@ namespace Invasion
         }
         // Returns the game state so that the inquirer knows how to act.
         public static GameState GetGameState() { return gameState; }
+        // Wins the game!
+        public static void Win() { playerWon = true; }
 
         // Initialize and store all the NavPoints.
         void Start()
         {
             gameManager = this;
             navPoints = FindObjectsOfType<NavPoint>();
+            AudioManager.PlayMusic(AudioManager.player.titleMusic, Source.MILD_MUSIC);
         }
 
         void Update()
@@ -128,19 +135,28 @@ namespace Invasion
         {
             gameState = GameState.Playing;
             titleScreen.SetActive(false);
+            AudioManager.PlayMusic(AudioManager.player.mildMusic, Source.MILD_MUSIC);
         }
 
         void EndGame()
         {
             gameState = GameState.GameOver;
             gameOverScreen.SetActive(true);
+            AudioManager.PlayMusic(AudioManager.player.titleMusic, Source.MILD_MUSIC);
+            AudioManager.SetVolume(Source.MILD_MUSIC, 1.0f);
+            AudioManager.SetVolume(Source.INTENSE_MUSIC, 0.0f);
+            intensity = 0;
+            if (playerWon)
+                gameOverScreen.transform.GetChild(1).gameObject.SetActive(true);
+            else
+                gameOverScreen.transform.GetChild(2).gameObject.SetActive(true);
         }
 
         void ResetGame()
         {
+            playerWon = false;
             gameState = GameState.TitleScreen;
-            gameOverScreen.SetActive(false);
-            titleScreen.SetActive(true);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
         }
     }
 }
