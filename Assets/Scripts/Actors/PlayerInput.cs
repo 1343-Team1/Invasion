@@ -42,6 +42,10 @@ namespace Invasion
         // Send instant input to the ActorController as fast as possible it will handle coordinating animation with physics.
         void Update()
         {
+            // Not time to play yet.
+            if (GameManager.GetGameState() != GameManager.GameState.Playing)
+                return;
+
             // ---- Movement ----
             actorController.Move(GetMovement());
             actorController.Run(IsRunning(), isRunToggle);

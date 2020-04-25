@@ -95,6 +95,10 @@ namespace Invasion
         // Manage the desiredSwarmlingCount based on GameManager intensity.
         void Update()
         {
+            // Not time to play yet.
+            if (GameManager.GetGameState() != GameManager.GameState.Playing)
+                return;
+
             desiredSwarmlingCount = (int)(minimumSwarmlings + (swarmlingCountMultiplier * gameManager.intensity));
 
             // Not enough swarmlings.

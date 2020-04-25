@@ -69,6 +69,10 @@ namespace Invasion
         // Move the projectile origin and allow shooting at intervals.
         void Update()
         {
+            // Not time to play yet.
+            if (GameManager.GetGameState() != GameManager.GameState.Playing)
+                return;
+
             // (It is important that these settings match the animator)
             PositionProjectileOrigin();                         // this is not related to physics.
             StopShooting();                                     // stop shooting if the gun wasn't fired recently.

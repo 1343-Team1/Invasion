@@ -43,6 +43,10 @@ namespace Invasion
         // Regenerate the shield if it regenerates.
         void Update()
         {
+            // Not time to play yet.
+            if (GameManager.GetGameState() != GameManager.GameState.Playing)
+                return;
+
             Regenerate();
             if (currentShield <= 0 && shieldObject.activeInHierarchy == true)
                 shieldObject.SetActive(false);

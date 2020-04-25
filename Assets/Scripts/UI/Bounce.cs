@@ -39,6 +39,10 @@ namespace Invasion
         // Update is called once per frame
         void Update()
         {
+            // Not time to play yet.
+            if (GameManager.GetGameState() != GameManager.GameState.Playing)
+                return;
+
             if (transform.localPosition.y > top)
                 target = bottom;
             else if (transform.localPosition.y < bottom)

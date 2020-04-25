@@ -44,6 +44,10 @@ namespace Invasion
         // Fade music in and out based on intensity.
         void Update()
         {
+            // Not time to play yet.
+            if (GameManager.GetGameState() != GameManager.GameState.Playing)
+                return;
+
             FadeMusic();
         }
 

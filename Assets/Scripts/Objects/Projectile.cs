@@ -48,6 +48,10 @@ namespace Invasion
         // Called as part of the physics system.
         void FixedUpdate()
         {
+            // Not time to play yet.
+            if (GameManager.GetGameState() != GameManager.GameState.Playing)
+                return;
+
             if (Time.time > timeToDestroy && hitAnimationTriggered)
                 Destroy(gameObject);                        // animation finished, destroy.
 
