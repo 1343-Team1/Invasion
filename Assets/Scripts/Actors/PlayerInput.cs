@@ -46,6 +46,9 @@ namespace Invasion
             if (GameManager.GetGameState() != GameManager.GameState.Playing)
                 return;
 
+            if (transform.position.y < -50)
+                actorController.Kill();
+
             // ---- Movement ----
             actorController.Move(GetMovement());
             actorController.Run(IsRunning(), isRunToggle);

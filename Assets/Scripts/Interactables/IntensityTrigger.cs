@@ -88,6 +88,11 @@ namespace Invasion
         // Manage whether to modify the intensity or not.
         void Update()
         {
+            // Not time to play yet.
+            if (GameManager.GetGameState() != GameManager.GameState.Playing)
+                return;
+
+
             if (!wasActivated)                          // the player has never triggered it.
                 return;
 

@@ -17,10 +17,11 @@ namespace Invasion
         ********************/
 
         // ========== STATIC ==========
-        static AudioManager player;
+        public static AudioManager player;
 
         // ========== PRIVATE / PROTECTED ==========
         GameManager gameManager;
+        float timeToPlaySwarmlingAmbiance;
 
         // ========== PUBLIC ==========
         [Header("Audio Sources")]
@@ -28,13 +29,22 @@ namespace Invasion
         public AudioSource musicIntense;
         public AudioSource sFX;
 
+        [Header("Music Clips")]
+        public AudioClip titleMusic;
+        public AudioClip mildMusic;
+
+        [Header("Swarmling Ambience")]
+        public List<AudioClip> swarmlingClips = new List<AudioClip>();
+        public float minFrequency = 1f;
+        public float maxFrequency = 3f;
+
 
         /********************
          * =- Methods -=
         ********************/
 
         // Get the GameManager and AudioSource.
-        void Start()
+        void Awake()
         {
             gameManager = GetComponent<GameManager>();
 
@@ -49,16 +59,41 @@ namespace Invasion
                 return;
 
             FadeMusic();
+
+            if (gameManager.intensity > 0.4)
+                PlaySwarmlingAmbiance();
+        }
+
+        void PlaySwarmlingAmbiance()
+        {
+            // Not time to play yet.
+            if (Time.time < timeToPlaySwarmlingAmbiance)
+                return;
+
+            AudioClip clip = swarmlingClips[Random.Range(0, (swarmlingClips.Count - 1))];
+            PlaySFX(clip, gameManager.intensity);
+            timeToPlaySwarmlingAmbiance = Time.time + Random.Range(minFrequency, maxFrequency);
         }
 
         // Play a new clip.
-        void PlayMusic(AudioClip clip, Source source)
+        public static void PlayMusic(AudioClip clip, Source source)
         {
-            AudioSource audioSource = (source == Source.MILD_MUSIC) ? musicMild : musicIntense;
+            AudioSource audioSource = player.musicMild;
+            if (source == Source.INTENSE_MUSIC)
+                audioSource = player.musicIntense;
 
             audioSource.Stop();
             audioSource.clip = clip;
             audioSource.Play();
+        }
+
+        public static void SetVolume(Source source, float volume)
+        {
+            AudioSource audioSource = player.musicMild;
+            if (source == Source.INTENSE_MUSIC)
+                audioSource = player.musicIntense;
+
+            audioSource.volume = volume;
         }
 
         // Fade volume in or out.
@@ -81,6 +116,7 @@ namespace Invasion
     public enum Source
     {
         MILD_MUSIC,
-        INTENSE_MUSIC
+        INTENSE_MUSIC,
+        TITLE_MUSIC
     }
 }

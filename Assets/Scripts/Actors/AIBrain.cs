@@ -61,7 +61,7 @@ namespace Invasion
                 stats.FillHealth();
 
                 // Get a navpoint if one is visible.
-                navPoint = GameManager.GetValidNavPoint(transform.position, navPointProximityLimit);
+                navPoint = GameManager.GetValidNavPoint(transform.position, navPointProximityLimit, isSwarmling);
             }
             else if (startingNavPoint)
                 navPoint = startingNavPoint;
@@ -151,7 +151,7 @@ namespace Invasion
             if (!navPoint || Vector2.Distance(stats.Position, navPoint.transform.position) < navPointProximityLimit)
             {
                 if (isSwarmling)
-                    navPoint = GameManager.GetValidNavPoint(transform.position, navPointProximityLimit);
+                    navPoint = GameManager.GetValidNavPoint(transform.position, navPointProximityLimit, isSwarmling);
                 else if (navPoint.nextNavPoint)
                     navPoint = navPoint.nextNavPoint;
             }

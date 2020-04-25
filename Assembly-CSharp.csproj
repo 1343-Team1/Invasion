@@ -82,6 +82,7 @@
     <Compile Include="Assets\Scripts\Interactables\Sensor.cs" />
     <Compile Include="Assets\Scripts\Interactables\SignalReceiver.cs" />
     <Compile Include="Assets\Scripts\Interactables\SignalSender.cs" />
+    <Compile Include="Assets\Scripts\Interactables\WinTrigger.cs" />
     <Compile Include="Assets\Scripts\Managers\ActorManager.cs" />
     <Compile Include="Assets\Scripts\Managers\AudioManager.cs" />
     <Compile Include="Assets\Scripts\Managers\DebrisManager.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="Assets\Scripts\Tools\EditorButtonAttribute.cs" />
     <Compile Include="Assets\Scripts\Tools\TestScriptButton.cs" />
     <Compile Include="Assets\Scripts\UI\Bounce.cs" />
+    <None Include="Assets\Attributions.txt" />
     <None Include="Assets\Art\Actors\Aliens\Swarmling\attributions.txt" />
     <None Include="Assets\Utilities\Shaders\Translucent.shader" />
     <Reference Include="Unity.Timeline.Editor">
