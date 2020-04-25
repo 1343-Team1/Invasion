@@ -54,7 +54,8 @@ namespace Invasion
             if (destination.TryReceiveSignal(this))
             {
                 isReady = false;
-                animator.SetBool("Activated", true);
+                if (animator)
+                    animator.SetBool("Activated", true);
                 return true;
             }
 
@@ -64,7 +65,8 @@ namespace Invasion
         void Reset()
         {
             isReady = true;
-            animator.SetBool("Activated", false);
+            if (animator)
+                animator.SetBool("Activated", false);
         }
     }
 }

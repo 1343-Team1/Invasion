@@ -54,8 +54,11 @@ namespace Invasion
         {
             if (isSwarmling)
             {
+                IsAlive = true;
                 isSwarmlingAlive = true;
+                actorController.Resurrect();
                 actorManager.actualSwarmlingCount++;
+                stats.FillHealth();
 
                 // Get a navpoint if one is visible.
                 navPoint = GameManager.GetValidNavPoint(transform.position, navPointProximityLimit);
