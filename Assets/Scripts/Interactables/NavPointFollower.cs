@@ -94,7 +94,10 @@ namespace Invasion
                 for (int i = 0; i < numberOfActors; i++)
                 {
                     if (!actorsOnPlatform[i].IsJumping())
+                    {
                         actorsOnPlatform[i].MoveRaw(moveBy);
+                        actorsOnPlatform[i].ResetJumps();
+                    }
                 }
             }
 

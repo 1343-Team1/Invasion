@@ -11545,8 +11545,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b22a92ae1c0ae0a4280cb2f1d6af10e7, type: 3}
   - {fileID: 8300000, guid: 05ad8e6972784604caa4884261ec3147, type: 3}
   - {fileID: 8300000, guid: 2394117ce460a0f4ab72772af30f7e40, type: 3}
-  minFrequency: 1
-  maxFrequency: 3
+  minFrequency: 2
+  maxFrequency: 6
 --- !u!4 &1442224220 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 548655961135399981, guid: b25378eb4d5e4ae4bb9d1484b4561907,

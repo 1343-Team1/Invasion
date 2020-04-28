@@ -279,6 +279,12 @@ namespace Invasion
             isFalling = true;                           // record that the actor is falling.
         }
 
+        // Allow external sources to reset the jumps (for platforms).
+        public void ResetJumps()
+        {
+            numberOfJumps = 0;
+        }
+
         // Animate back to idle only if not moving.
         void AnimateToIdle()
         {
