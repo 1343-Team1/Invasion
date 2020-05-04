@@ -26,8 +26,8 @@ namespace Invasion
 
         // Exposed private/protected variables.
         [Header("Debug Data")]
-        [SerializeField] [DisplayWithoutEdit()] protected Vector2 adjustedInput = new Vector2(0.0f, 0.0f); // the adjusted input coming in from the controller.
-        [SerializeField] [DisplayWithoutEdit()] protected Vector2 input = new Vector2(0.0f, 0.0f); // the input coming from the controller or aibrain.
+        [SerializeField] /*[DisplayWithoutEdit()]*/ protected Vector2 adjustedInput = new Vector2(0.0f, 0.0f); // the adjusted input coming in from the controller.
+        [SerializeField] /*[DisplayWithoutEdit()]*/ protected Vector2 input = new Vector2(0.0f, 0.0f); // the input coming from the controller or aibrain.
 
         /********************
          * =- Functions -=

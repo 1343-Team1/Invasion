@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7187169990726612435}
   - component: {fileID: 7187169990726612438}
+  - component: {fileID: 3281921969256667890}
   m_Layer: 15
   m_Name: Sensor
   m_TagString: Untagged
@@ -55,5 +56,21 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 1.2, y: 0.2}
   m_EdgeRadius: 0
+--- !u!114 &3281921969256667890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7187169990726612440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 179a427279c7a78449b8ff9793966f1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signalReceivers: []
+  triggersOnce: 0
+  closesWhenPlayerLeaves: 0
+  activationClip: {fileID: 0}

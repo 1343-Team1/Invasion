@@ -3,6 +3,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 namespace Invasion
 {
@@ -17,7 +18,7 @@ namespace Invasion
 
         // ========== PRIVATE / PROTECTED ==========
         GameManager gameManager;
-        [SerializeField] [DisplayWithoutEdit()] List<ActorController> actors;
+        [SerializeField] /*[DisplayWithoutEdit()]*/ List<ActorController> actors;
         List<AIBrain> swarmlingPool;
         List<NavPoint> swarmlingNavPoints;
         PlayerInput player;
