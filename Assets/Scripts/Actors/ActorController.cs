@@ -95,7 +95,7 @@ namespace Invasion
 
         // Exposed private/protected variables.
         [Header("Debug Data")]
-        [SerializeField][DisplayWithoutEdit()] Vector2 velocity = new Vector2();    // display the velocity.
+        [SerializeField]/*[DisplayWithoutEdit()]*/ Vector2 velocity = new Vector2();    // display the velocity.
 
 
         /********************
